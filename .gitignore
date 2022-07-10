@@ -1,1 +1,12 @@
+# 서드파티 관련
 node_modules
+
+# VSCode 관련
+.vscode
+
+# build 관련
+dist/
+build/
+
+# 기타
+.DS_Store 
