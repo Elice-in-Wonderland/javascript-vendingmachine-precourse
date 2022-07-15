@@ -10,4 +10,6 @@ function deepFreeze(obj: any) {
   return Object.freeze(obj);
 }
 
-export { deepFreeze };
+const removeFirstLetter = (selector: string) => selector.slice(1);
+
+export { deepFreeze, removeFirstLetter };

@@ -1,3 +1,4 @@
-import { deepFreeze } from './common';
+import { deepFreeze, removeFirstLetter } from './common';
+import { $, createElement } from './dom';
 
-export { deepFreeze };
+export { deepFreeze, removeFirstLetter, $, createElement };
