@@ -1,3 +1,5 @@
+import { on } from '../utils/dom';
+
 class View {
   element: HTMLElement;
 
@@ -5,12 +7,17 @@ class View {
     this.element = element;
   }
 
-  show() {
-    this.element.style.display = 'block';
+  render() {
+    this.element.innerHTML = this.markUp();
   }
 
-  hide() {
-    this.element.style.display = 'none';
+  markUp() {
+    return ``;
+  }
+
+  on(eventName: string, handler: (event: Event) => void) {
+    on(this.element, eventName, handler);
+    return this;
   }
 }
 

@@ -8,10 +8,11 @@ const SELECTOR = deepFreeze({
     PRODUCT_PURCHASE: '#product-purchase-menu',
   },
   PRODUCT_ADD: {
+    FORM: '#product-add-form',
     NAME_INPUT: '#product-name-input',
     PRICE_INPUT: '#product-price-input',
     QUANTITY_INPUT: '#product-quantity-input',
-    ADD_BUTTON: '#product-add-button',
+    BUTTON: '#product-add-button',
   },
   VENDING_MACHINE_MANAGE: {
     CHARGE_INPUT: '#vending-machine-charge-input',
