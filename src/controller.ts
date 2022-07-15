@@ -28,9 +28,8 @@ class Controller {
   }
 
   subscribeEvent() {
-    // CustomEvent type TODO
-    this.tabView.on('@change', (event: any) =>
-      this.changeTab(event.detail.tab),
+    this.tabView.on('@change', (event: Event) =>
+      this.changeTab((event as CustomEvent).detail.tab),
     );
   }
 
