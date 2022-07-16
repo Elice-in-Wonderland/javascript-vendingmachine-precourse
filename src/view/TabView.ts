@@ -3,14 +3,14 @@ import { $, removeFirstLetter } from '../utils';
 import { delegate } from '../utils/dom';
 import View from './View';
 
-export function emit(target: HTMLElement, eventName: string, detail: any) {
-  const event = new CustomEvent(eventName, { detail });
+export function emit(target: HTMLElement, typeArg: string, detail: any) {
+  const event = new CustomEvent(typeArg, { detail });
   target.dispatchEvent(event);
 }
 
 class TabView extends View {
   constructor() {
-    super($('#header') as HTMLHeadElement);
+    super($(SELECTOR.HEADER) as HTMLHeadElement);
     this.bindEvents();
     this.render();
   }

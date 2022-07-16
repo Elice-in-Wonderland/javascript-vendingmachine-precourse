@@ -1,20 +1,19 @@
 import { SELECTOR } from '../constants';
+import { VendingMachine } from '../types/vendingMachine';
 import { removeFirstLetter } from '../utils';
 
-class VendingMachine {
+class Store {
   selectedTab: string;
 
-  inputAmount: number;
-
-  coins: [];
-
-  products: [];
+  vendingMachine: VendingMachine;
 
   constructor() {
     this.selectedTab = removeFirstLetter(SELECTOR.TAB_MENU.PRODUCT_ADD); // 처음 시작할 탭
-    this.inputAmount = 0;
-    this.coins = [];
-    this.products = [];
+    this.vendingMachine = {
+      inputAmount: 0,
+      coins: { '500': 0, '100': 0, '50': 0, '10': 0 },
+      products: [],
+    };
   }
 
   setSelectedTab(tab: string) {
@@ -22,4 +21,4 @@ class VendingMachine {
   }
 }
 
-export default VendingMachine;
+export default Store;

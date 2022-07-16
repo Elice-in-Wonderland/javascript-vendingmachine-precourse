@@ -1,12 +1,12 @@
 import { SELECTOR } from './constants';
-import VendingMachine from './model/VendingMachine';
+import Store from './model/Store';
 import { ViewType } from './types/views';
 import ProductAddView from './view/ProductAddView';
 import TabView from './view/TabView';
 import VendingMachineManageView from './view/VendingMachineManage';
 
 class Controller {
-  model: VendingMachine;
+  model: Store;
 
   tabView: TabView;
 
@@ -16,7 +16,7 @@ class Controller {
 
   productPurchaseView: ProductAddView;
 
-  constructor(model: VendingMachine, views: ViewType) {
+  constructor(model: Store, views: ViewType) {
     this.model = model;
     this.tabView = views.tabView;
     this.productAddView = views.productAddView;
@@ -40,7 +40,6 @@ class Controller {
 
   render() {
     const tabId = `#${this.model.selectedTab}`;
-    console.log(tabId);
 
     if (tabId === SELECTOR.TAB_MENU.PRODUCT_ADD) {
       this.productAddView.render();
@@ -57,11 +56,8 @@ class Controller {
     }
   }
 
-  // TODO: 버블링을 활용한 탭 메뉴 핸들링
-  // 상품 관리, 잔돈 충전, 상품 구매
-
-  // TODO: 렌더링할 때 모델의 정보가 필요해서 모델을 주입
-  // TODO: 뷰에서는 전달된 모델로 화면에 렌더링
+  // TODO: 상품 추가하기에 대한 로직 구현
+  // TODO: 상품현황에 대한 View 구현
 }
 
 export default Controller;

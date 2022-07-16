@@ -4,7 +4,7 @@ import View from './View';
 
 class ProductAddView extends View {
   constructor() {
-    super($('#main') as HTMLElement);
+    super($(SELECTOR.MAIN) as HTMLElement);
   }
 
   markUp() {

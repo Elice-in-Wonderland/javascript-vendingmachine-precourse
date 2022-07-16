@@ -2,6 +2,8 @@ import { deepFreeze } from '../utils';
 
 const SELECTOR = deepFreeze({
   ROOT: '#app',
+  HEADER: '#header',
+  MAIN: '#main',
   TAB_MENU: {
     PRODUCT_ADD: '#product-add-menu',
     VENDING_MACHINE_MANAGE: '#vending-machine-manage-menu',

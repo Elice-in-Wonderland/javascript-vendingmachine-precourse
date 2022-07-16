@@ -1,21 +1,25 @@
+import { SELECTOR } from './constants';
 import Controller from './controller';
-import VendingMachine from './model/VendingMachine';
-import { $, createElement } from './utils';
-import ProductAddView from './view/ProductAddView';
-import ProductPurchaseView from './view/ProductPurchaseView';
+import Store from './model/Store';
+import { $, createElement, removeFirstLetter } from './utils';
 import TabView from './view/TabView';
+import ProductAddView from './view/ProductAddView';
 import VendingMachineManageView from './view/VendingMachineManage';
+import ProductPurchaseView from './view/ProductPurchaseView';
+
+function initDom() {
+  ($(SELECTOR.ROOT) as HTMLDivElement).appendChild(
+    createElement('header', { id: removeFirstLetter(SELECTOR.HEADER) }),
+  );
+
+  ($(SELECTOR.ROOT) as HTMLDivElement).appendChild(
+    createElement('main', { id: removeFirstLetter(SELECTOR.MAIN) }),
+  );
+}
 
 function main() {
-  ($('#app') as HTMLDivElement).appendChild(
-    createElement('header', { id: 'header' }),
-  );
-
-  ($('#app') as HTMLDivElement).appendChild(
-    createElement('main', { id: 'main' }),
-  );
-
-  const model = new VendingMachine();
+  initDom();
+  const model = new Store();
 
   const views = {
     tabView: new TabView(),
@@ -24,6 +28,7 @@ function main() {
     productPurchaseView: new ProductPurchaseView(),
   };
 
+  // eslint-disable-next-line no-new
   new Controller(model, views);
 }
 

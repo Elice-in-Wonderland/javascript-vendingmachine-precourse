@@ -1,9 +1,10 @@
+import { SELECTOR } from '../constants';
 import { $ } from '../utils';
 import View from './View';
 
 class VendingMachineManageView extends View {
   constructor() {
-    super($('#main') as HTMLElement);
+    super($(SELECTOR.MAIN) as HTMLElement);
   }
 
   markUp() {
