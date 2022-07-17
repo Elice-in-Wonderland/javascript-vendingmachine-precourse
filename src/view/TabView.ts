@@ -1,12 +1,6 @@
 import { SELECTOR } from '../constants';
-import { $, removeFirstLetter } from '../utils';
-import { delegate } from '../utils/dom';
+import { $, removeFirstLetter, delegate, emit } from '../utils';
 import View from './View';
-
-export function emit(target: HTMLElement, typeArg: string, detail: any) {
-  const event = new CustomEvent(typeArg, { detail });
-  target.dispatchEvent(event);
-}
 
 class TabView extends View {
   constructor() {

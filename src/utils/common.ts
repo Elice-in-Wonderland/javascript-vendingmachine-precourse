@@ -1,3 +1,5 @@
+export type FormDataObj = Record<string, string | undefined>;
+
 const isFreezableObj = (value: any) =>
   value && typeof value === 'object' && !Object.isFrozen(value);
 
@@ -12,4 +14,23 @@ function deepFreeze(obj: any) {
 
 const removeFirstLetter = (selector: string) => selector.slice(1);
 
-export { deepFreeze, removeFirstLetter };
+function formDataToObject(formData: FormData) {
+  return [...formData.entries()].reduce((acc: FormDataObj, [key, value]) => {
+    // input return type === string
+    if (typeof value !== 'string' || value === '') return acc;
+
+    acc[key] = value;
+    return acc;
+  }, {});
+}
+
+const every = <T>(f: (arg: T) => boolean, iter: any) => {
+  const res = [];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const a of iter) {
+    if (f(a)) return false;
+  }
+  return true;
+};
+
+export { deepFreeze, removeFirstLetter, formDataToObject, every };

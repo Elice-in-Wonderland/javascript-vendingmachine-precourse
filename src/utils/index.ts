@@ -1,4 +1,21 @@
-import { deepFreeze, removeFirstLetter } from './common';
-import { $, createElement } from './dom';
+import {
+  deepFreeze,
+  removeFirstLetter,
+  formDataToObject,
+  every,
+} from './common';
+import { $, $$, createElement, delegate, emit } from './dom';
+import { isValidProduct } from './validate';
 
-export { deepFreeze, removeFirstLetter, $, createElement };
+export {
+  deepFreeze,
+  removeFirstLetter,
+  formDataToObject,
+  every,
+  $,
+  $$,
+  createElement,
+  delegate,
+  emit,
+  isValidProduct,
+};

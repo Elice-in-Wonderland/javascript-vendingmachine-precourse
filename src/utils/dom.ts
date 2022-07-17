@@ -3,7 +3,7 @@ function $(selector: string, scope = document) {
 }
 
 function $$(selector: string, scope: HTMLElement | Document = document) {
-  return scope.querySelectorAll(selector);
+  return [...scope.querySelectorAll(selector)];
 }
 
 function createElement<K extends keyof HTMLElementTagNameMap>(
@@ -48,4 +48,9 @@ function delegate(
   on(target, eventName, emitEvent);
 }
 
-export { $, $$, createElement, on, delegate };
+function emit(target: HTMLElement, typeArg: string, detail: any) {
+  const event = new CustomEvent(typeArg, { detail });
+  target.dispatchEvent(event);
+}
+
+export { $, $$, createElement, on, delegate, emit };

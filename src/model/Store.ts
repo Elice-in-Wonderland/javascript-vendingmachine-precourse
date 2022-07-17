@@ -1,6 +1,6 @@
 import { SELECTOR } from '../constants';
-import { VendingMachine } from '../types/vendingMachine';
-import { removeFirstLetter } from '../utils';
+import { Product, VendingMachine } from '../types/vendingMachine';
+import { isValidProduct, removeFirstLetter } from '../utils';
 
 class Store {
   selectedTab: string;
@@ -18,6 +18,17 @@ class Store {
 
   setSelectedTab(tab: string) {
     this.selectedTab = tab;
+  }
+
+  addProduct(product: Partial<Product>) {
+    if (!isValidProduct(product, this.vendingMachine.products)) return false;
+
+    this.vendingMachine.products = [
+      product as Product,
+      ...this.vendingMachine.products,
+    ];
+
+    return this.vendingMachine.products;
   }
 }
 
