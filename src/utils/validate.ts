@@ -1,9 +1,10 @@
+import { ERROR_MESSAGE } from '../constants';
 import { Product } from '../types/vendingMachine';
 import { every } from './common';
 
 const isContainsBlank = (str: string) => str.match(/\s+/);
 
-const isInteger = (value: number) => Number.isInteger(value);
+const isNotInteger = (value: number) => !Number.isInteger(value);
 
 const isSmallerThan100 = (value: number) => value < 100;
 
@@ -13,27 +14,42 @@ function isValidProduct(
   { name, price, quantity }: Partial<Product>,
   products: Product[],
 ) {
-  if (!name || !price || !quantity) {
-    alert('모든 값이 입력이 되어야 합니다.');
+  if (!name) {
+    alert(ERROR_MESSAGE.PRODUCT_NAME_EMPTY);
+    return false;
+  }
+
+  if (!price) {
+    alert(ERROR_MESSAGE.PRODUCT_PRICE_EMPTY);
+    return false;
+  }
+
+  if (!quantity) {
+    alert(ERROR_MESSAGE.PRODUCT_QUANTITY_EMPTY);
     return false;
   }
 
   if (isContainsBlank(name)) {
-    alert('상품명에 공백이 있어서는 안됩니다.');
+    alert(ERROR_MESSAGE.PRODUCT_NAME_BLANK);
     return false;
   }
   if (!every((product: Product) => product.name !== name, products)) {
-    alert('상품명은 고유해야 합니다.');
+    alert(ERROR_MESSAGE.PRODUCT_NAME_DUPLICATE);
     return false;
   }
 
-  if (!isInteger(price) || !isInteger(quantity)) {
-    alert('가격 또는 수량은 자연수여야 합니다.');
+  if (isNotInteger(price)) {
+    alert(ERROR_MESSAGE.PRODUCT_PRICE_TYPE);
     return false;
   }
 
   if (isSmallerThan100(price) || isNotDividedBy10(price)) {
-    alert('상품 가격은 100원부터 시작하며 10원으로 나누어져야 합니다.');
+    alert(ERROR_MESSAGE.PRODUCT_PRICE_RANGE);
+    return false;
+  }
+
+  if (isNotInteger(quantity)) {
+    alert(ERROR_MESSAGE.PRODUCT_QUANTITY_TYPE);
     return false;
   }
 

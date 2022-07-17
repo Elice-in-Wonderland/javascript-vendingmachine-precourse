@@ -1,4 +1,4 @@
-import { deepFreeze } from '../utils';
+import { deepFreeze } from '../utils/common';
 
 const SELECTOR = deepFreeze({
   ROOT: '#app',
@@ -48,9 +48,17 @@ const SELECTOR = deepFreeze({
   },
 });
 
-const ERROR_MESSAGE = deepFreeze({
+const ERROR_MESSAGE = Object.freeze({
+  PRODUCT_NAME_EMPTY: '상품명을 입력해주세요. ex) 코카콜라',
+  PRODUCT_NAME_BLANK: '상품명에 공백이 있어서는 안됩니다. ex) 펩시콜라',
   PRODUCT_NAME_DUPLICATE:
-    '제품의 이름은 중복되지 않게 작성해주세요. ex) 코카콜라, 펩시콜라',
+    '상품의 이름은 중복되지 않게 작성해주세요. ex) 코카콜라, 펩시콜라',
+  PRODUCT_PRICE_EMPTY: '가격을 입력해주세요. ex) 150',
+  PRODUCT_PRICE_TYPE: '가격은 자연수여야 합니다. ex) 150',
+  PRODUCT_PRICE_RANGE:
+    '상품 가격은 100원부터 시작하며 10원으로 나누어져야 합니다. ex) 150',
+  PRODUCT_QUANTITY_EMPTY: '수량을 입력해주세요. ex) 10',
+  PRODUCT_QUANTITY_TYPE: '수량은 자연수여야 합니다. ex) 10',
 });
 
 export { SELECTOR, ERROR_MESSAGE };
