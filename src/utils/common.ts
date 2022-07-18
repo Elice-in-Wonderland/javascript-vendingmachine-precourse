@@ -25,10 +25,9 @@ function formDataToObject(formData: FormData) {
 }
 
 const every = <T>(f: (arg: T) => boolean, iter: any) => {
-  const res = [];
   // eslint-disable-next-line no-restricted-syntax
   for (const a of iter) {
-    if (f(a)) return false;
+    if (!f(a)) return false;
   }
   return true;
 };
