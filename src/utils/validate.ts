@@ -4,7 +4,8 @@ import { every } from './common';
 
 const isContainsBlank = (str: string) => str.match(/\s+/);
 
-const isNotInteger = (value: number) => !Number.isInteger(value);
+const isNotValidRange = (value: number, min = 1, max = 9999) =>
+  value < min || value > max;
 
 const isSmallerThan100 = (value: number) => value < 100;
 
@@ -38,17 +39,12 @@ function isValidProduct(
     return false;
   }
 
-  if (isNotInteger(price)) {
-    alert(ERROR_MESSAGE.PRODUCT_PRICE_TYPE);
-    return false;
-  }
-
   if (isSmallerThan100(price) || isNotDividedBy10(price)) {
     alert(ERROR_MESSAGE.PRODUCT_PRICE_RANGE);
     return false;
   }
 
-  if (isNotInteger(quantity)) {
+  if (isNotValidRange(quantity)) {
     alert(ERROR_MESSAGE.PRODUCT_QUANTITY_TYPE);
     return false;
   }
