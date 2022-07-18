@@ -46,18 +46,14 @@ class Controller {
 
   productSubmit(product: Partial<Product>) {
     const products = this.model.addProduct(product);
-
-    // TODO: 상품현황에 대한 View 구현
-    // TODO: product add 후에 그 아이템으로 렌더링
-    debugger;
-    if (products) this.productAddView.render();
+    if (products) this.productAddView.render(products);
   }
 
   render() {
     const tabId = `#${this.model.selectedTab}`;
 
     if (tabId === SELECTOR.TAB_MENU.PRODUCT_ADD) {
-      this.productAddView.render();
+      this.productAddView.render(this.model.getProducts());
       return;
     }
 

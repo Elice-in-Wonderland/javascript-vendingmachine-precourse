@@ -7,11 +7,11 @@ class View {
     this.element = element;
   }
 
-  render() {
-    this.element.innerHTML = this.markUp();
+  render(item?: any) {
+    this.element.innerHTML = this.markUp(item);
   }
 
-  markUp() {
+  markUp(item?: any) {
     return ``;
   }
 

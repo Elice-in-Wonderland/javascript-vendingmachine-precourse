@@ -28,6 +28,10 @@ class Store {
       ...this.vendingMachine.products,
     ];
 
+    return this.getProducts();
+  }
+
+  getProducts() {
     return this.vendingMachine.products;
   }
 }
