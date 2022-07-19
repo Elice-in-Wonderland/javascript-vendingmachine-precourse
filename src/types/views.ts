@@ -1,7 +1,7 @@
 import ProductAddView from '../view/ProductAddView';
 import ProductPurchaseView from '../view/ProductPurchaseView';
 import TabView from '../view/TabView';
-import VendingMachineManageView from '../view/VendingMachineManage';
+import VendingMachineManageView from '../view/VendingMachineManageView';
 
 interface ViewType {
   tabView: TabView;

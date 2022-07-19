@@ -5,7 +5,7 @@ import {
   every,
 } from './common';
 import { $, $$, createElement, delegate, emit } from './dom';
-import { isValidProduct } from './validate';
+import { isValidProduct, isValidAmount, isEnoughAmount } from './validate';
 
 export {
   deepFreeze,
@@ -18,4 +18,6 @@ export {
   delegate,
   emit,
   isValidProduct,
+  isValidAmount,
+  isEnoughAmount,
 };

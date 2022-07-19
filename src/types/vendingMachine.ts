@@ -1,6 +1,10 @@
+import { COIN_LIST } from '../constants';
+
+type Coin = typeof COIN_LIST[number];
+
 interface VendingMachine {
   inputAmount: number;
-  coins: Record<string, number>;
+  coins: Record<Coin, number>;
   products: Product[];
 }
 
@@ -11,4 +15,4 @@ interface Product {
   quantity: number;
 }
 
-export { VendingMachine, Product };
+export { Coin, VendingMachine, Product };

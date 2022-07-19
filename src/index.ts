@@ -4,7 +4,7 @@ import Store from './model/Store';
 import { $, createElement, removeFirstLetter } from './utils';
 import TabView from './view/TabView';
 import ProductAddView from './view/ProductAddView';
-import VendingMachineManageView from './view/VendingMachineManage';
+import VendingMachineManageView from './view/VendingMachineManageView';
 import ProductPurchaseView from './view/ProductPurchaseView';
 
 function initDom() {

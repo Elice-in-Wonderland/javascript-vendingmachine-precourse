@@ -2,6 +2,9 @@ import { ERROR_MESSAGE } from '../constants';
 import { Product } from '../types/vendingMachine';
 import { every } from './common';
 
+const isEnoughAmount = (insertedAmount: number, randomCoin: number) =>
+  insertedAmount - randomCoin >= 0;
+
 const isContainsBlank = (str: string) => str.match(/\s+/);
 
 const isNotValidRange = (value: number, min = 1, max = 9999) =>
@@ -52,4 +55,23 @@ function isValidProduct(
   return true;
 }
 
-export { isValidProduct };
+function isValidAmount(amount?: number) {
+  if (!amount) {
+    console.log('금액을 입력해주세요. ex) 10000');
+    return false;
+  }
+
+  if (isNotDividedBy10(amount)) {
+    console.log('금액은 10으로 나누어 떨어져야 합니다. ex) 10000');
+    return false;
+  }
+
+  if (isNotValidRange(amount, 1, Number.MAX_VALUE)) {
+    console.log('금액은 자연수여야 합니다. ex) 10000');
+    return false;
+  }
+
+  return true;
+}
+
+export { isEnoughAmount, isValidProduct, isValidAmount };

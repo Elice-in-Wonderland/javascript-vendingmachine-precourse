@@ -5,7 +5,7 @@ import { ViewType } from './types/views';
 import ProductAddView from './view/ProductAddView';
 import ProductPurchaseView from './view/ProductPurchaseView';
 import TabView from './view/TabView';
-import VendingMachineManageView from './view/VendingMachineManage';
+import VendingMachineManageView from './view/VendingMachineManageView';
 
 class Controller {
   model: Store;
@@ -37,6 +37,10 @@ class Controller {
     this.productAddView.on('@add', (event: Event) =>
       this.productSubmit((event as CustomEvent).detail.product),
     );
+
+    this.vendingMachineManageView.on('@addCoins', (event: Event) =>
+      this.vendingMachineManageSubmit((event as CustomEvent).detail.amount),
+    );
   }
 
   changeTab(tab: string) {
@@ -49,6 +53,11 @@ class Controller {
     if (products) this.productAddView.render(products);
   }
 
+  vendingMachineManageSubmit(amount?: number) {
+    const vendingMachine = this.model.addCoins(amount);
+    if (vendingMachine) this.vendingMachineManageView.render(vendingMachine);
+  }
+
   render() {
     const tabId = `#${this.model.selectedTab}`;
 
@@ -58,7 +67,7 @@ class Controller {
     }
 
     if (tabId === SELECTOR.TAB_MENU.VENDING_MACHINE_MANAGE) {
-      this.vendingMachineManageView.render();
+      this.vendingMachineManageView.render(this.model.getVendingMachine());
       return;
     }
 

@@ -17,6 +17,7 @@ const SELECTOR = deepFreeze({
     BUTTON: '#product-add-button',
   },
   VENDING_MACHINE_MANAGE: {
+    CHARGE_FORM: '#vending-machine-charge-form',
     CHARGE_INPUT: '#vending-machine-charge-input',
     CHARGE_BUTTON: '#vending-machine-charge-button',
     CHARGE_AMOUNT: '#vending-machine-charge-amount',
@@ -61,4 +62,6 @@ const ERROR_MESSAGE = Object.freeze({
   PRODUCT_QUANTITY_TYPE: '수량은 자연수여야 합니다. ex) 10',
 });
 
-export { SELECTOR, ERROR_MESSAGE };
+const COIN_LIST = [500, 100, 50, 10];
+
+export { SELECTOR, ERROR_MESSAGE, COIN_LIST };
