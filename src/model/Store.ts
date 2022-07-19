@@ -27,7 +27,7 @@ class Store {
   }
 
   addProduct(product: Partial<Product>) {
-    if (!isValidProduct(product, this.vendingMachine.products)) return false;
+    if (!isValidProduct(product, this.vendingMachine.products)) return null;
 
     this.vendingMachine.products = [
       product as Product,
