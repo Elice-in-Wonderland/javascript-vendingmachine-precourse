@@ -57,17 +57,15 @@ function isValidProduct(
 
 function isValidAmount(amount?: number) {
   if (!amount) {
-    console.log('금액을 입력해주세요. ex) 10000');
+    alert(ERROR_MESSAGE.AMOUNT_EMPTY);
     return false;
   }
 
-  if (isNotDividedBy10(amount)) {
-    console.log('금액은 10으로 나누어 떨어져야 합니다. ex) 10000');
-    return false;
-  }
-
-  if (isNotValidRange(amount, 1, Number.MAX_VALUE)) {
-    console.log('금액은 자연수여야 합니다. ex) 10000');
+  if (
+    isNotValidRange(amount, 1, Number.MAX_VALUE) ||
+    isNotDividedBy10(amount)
+  ) {
+    alert(ERROR_MESSAGE.AMOUNT_RANGE);
     return false;
   }
 

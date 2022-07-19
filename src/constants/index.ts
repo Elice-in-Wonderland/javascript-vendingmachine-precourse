@@ -60,6 +60,9 @@ const ERROR_MESSAGE = Object.freeze({
     '상품 가격은 100원부터 시작하며 10원으로 나누어져야 합니다. ex) 150',
   PRODUCT_QUANTITY_EMPTY: '수량을 입력해주세요. ex) 10',
   PRODUCT_QUANTITY_TYPE: '수량은 자연수여야 합니다. ex) 10',
+  AMOUNT_EMPTY: '금액을 입력해주세요. ex) 10000',
+  AMOUNT_RANGE:
+    '금액은 자연수이면서 금액은 10으로 나누어 떨어져야 합니다. ex) 10000',
 });
 
 const COIN_LIST = [500, 100, 50, 10];
