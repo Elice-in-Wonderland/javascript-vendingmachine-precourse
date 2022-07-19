@@ -19,6 +19,7 @@ class Store {
       inputAmount: 0,
       coins: { 500: 0, 100: 0, 50: 0, 10: 0 },
       products: [],
+      chargeCoins: { 500: 0, 100: 0, 50: 0, 10: 0 },
     };
   }
 
@@ -27,18 +28,18 @@ class Store {
   }
 
   addProduct(product: Partial<Product>) {
-    if (!isValidProduct(product, this.vendingMachine.products)) return null;
+    if (!isValidProduct(product, this.vendingMachine.products)) return false;
 
     this.vendingMachine.products = [
       product as Product,
       ...this.vendingMachine.products,
     ];
 
-    return this.getProducts();
+    return true;
   }
 
   addCoins(amount?: number) {
-    if (!isValidAmount(amount)) return null;
+    if (!isValidAmount(amount)) return false;
 
     let insertedAmount = amount as number;
 
@@ -51,7 +52,7 @@ class Store {
       insertedAmount -= randomCoin;
     }
 
-    return this.getVendingMachine();
+    return true;
   }
 
   getProducts() {

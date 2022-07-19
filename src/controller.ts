@@ -49,13 +49,15 @@ class Controller {
   }
 
   productSubmit(product: Partial<Product>) {
-    const products = this.model.addProduct(product);
-    if (products) this.productAddView.render(products);
+    if(!this.model.addProduct(product)) return;
+
+    this.productAddView.render(this.model.getProducts());
   }
 
   vendingMachineManageSubmit(amount?: number) {
-    const vendingMachine = this.model.addCoins(amount);
-    if (vendingMachine) this.vendingMachineManageView.render(vendingMachine);
+    if(!this.model.addCoins(amount)) return;
+
+    this.vendingMachineManageView.render(this.model.getVendingMachine());
   }
 
   render() {
@@ -72,7 +74,7 @@ class Controller {
     }
 
     if (tabId === SELECTOR.TAB_MENU.PRODUCT_PURCHASE) {
-      this.productPurchaseView.render();
+      this.productPurchaseView.render(this.model.getVendingMachine());
     }
   }
 }
