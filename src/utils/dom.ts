@@ -10,4 +10,14 @@ const domSelector = (
   return scope.querySelector(selector);
 };
 
-export { domCreator, domSelector };
+const addEventListenerToTarget = (
+  eventTarget: TargetType | null,
+  type: string,
+  listener: (event: Event) => void,
+) => {
+  if (eventTarget == null) return;
+
+  eventTarget.addEventListener(type, listener);
+};
+
+export { domCreator, domSelector, addEventListenerToTarget };

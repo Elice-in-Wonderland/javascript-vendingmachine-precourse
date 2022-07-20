@@ -1,6 +1,10 @@
+import App from './app';
 import Navbar from './components/navbar';
+import Controller from './controller';
+import Page from './pages/page';
 
 const navbar = new Navbar();
+const page = new Page(navbar);
 
-const newNode = navbar.createNavBtnElements();
-navbar.addNavBtnElements(newNode);
+new App(page);
+new Controller(page);

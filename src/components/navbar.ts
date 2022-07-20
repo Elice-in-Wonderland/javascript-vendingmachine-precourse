@@ -10,6 +10,7 @@ class Navbar {
 
   createNavBtnElements(): HTMLElement {
     const newNode: HTMLElement = domCreator('ul');
+    newNode.id = 'navbar';
 
     this.btnNames.forEach((name) => {
       const btnNode: HTMLElement = domCreator('li');
