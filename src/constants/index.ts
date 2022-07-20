@@ -27,6 +27,7 @@ const SELECTOR = deepFreeze({
     COIN_10_QUANTITY: '#vending-machine-coin-10-quantity',
   },
   PRODUCT_PURCHASE: {
+    CHARGE_FORM: '#charge-form',
     CHARGE_INPUT: '#charge-input',
     CHARGE_BUTTON: '#charge-button',
     CHARGE_AMOUNT: '#charge-amount',

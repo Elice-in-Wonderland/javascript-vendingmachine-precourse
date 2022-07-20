@@ -6,6 +6,7 @@ interface VendingMachine {
   inputAmount: number;
   coins: Record<Coin, number>;
   products: Product[];
+  chargeCoins: Record<Coin, number>;
 }
 
 interface Product {

@@ -1,4 +1,4 @@
-import { COIN_LIST, SELECTOR } from '../../constants';
+import { SELECTOR } from '../../constants';
 import { Coin, VendingMachine } from '../../types/vendingMachine';
 import { removeFirstLetter } from '../../utils';
 
