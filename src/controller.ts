@@ -45,6 +45,10 @@ class Controller {
     this.productPurchaseView.on('@inputMoney', (event: Event) =>
       this.productPurchaseSubmit((event as CustomEvent).detail.amount),
     );
+
+    this.productPurchaseView.on('@productPurchase', (event: Event) =>
+      this.handleProductPurchase((event as CustomEvent).detail.product),
+    );
   }
 
   changeTab(tab: string) {
@@ -66,6 +70,12 @@ class Controller {
 
   productPurchaseSubmit(amount?: number) {
     if (!this.model.inputMoney(amount)) return;
+
+    this.productPurchaseView.render(this.model.getVendingMachine());
+  }
+
+  handleProductPurchase(product: Pick<Product, 'name' | 'price'>) {
+    if (!this.model.productPurchase(product)) return;
 
     this.productPurchaseView.render(this.model.getVendingMachine());
   }

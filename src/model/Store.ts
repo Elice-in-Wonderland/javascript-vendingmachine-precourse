@@ -1,4 +1,5 @@
-import { COIN_LIST, SELECTOR } from '../constants';
+/* eslint-disable no-param-reassign */
+import { COIN_LIST, ERROR_MESSAGE, SELECTOR } from '../constants';
 import { Product, VendingMachine } from '../types/vendingMachine';
 import {
   isValidAmount,
@@ -18,7 +19,7 @@ class Store {
     this.vendingMachine = {
       inputAmount: 0,
       coins: { 500: 0, 100: 0, 50: 0, 10: 0 },
-      products: [],
+      products: [{ name: 'test', price: 5000, quantity: 5 }],
       chargeCoins: { 500: 0, 100: 0, 50: 0, 10: 0 },
     };
   }
@@ -59,6 +60,33 @@ class Store {
     if (!isValidAmount(amount)) return false;
 
     this.vendingMachine.inputAmount += amount as number;
+
+    return true;
+  }
+
+  productPurchase(product: Pick<Product, 'name' | 'price'>) {
+    const { name, price } = product;
+
+    if (!isEnoughAmount(this.vendingMachine.inputAmount, price)) {
+      alert(ERROR_MESSAGE.PRODUCT_PURCHASE_ERROR);
+      return false;
+    }
+
+    const newVendingMachine = {
+      inputAmount: (this.vendingMachine.inputAmount -= price),
+      products: this.vendingMachine.products.map((oldProduct) => {
+        if (oldProduct.name === name) {
+          oldProduct.quantity -= 1;
+        }
+
+        return oldProduct;
+      }),
+    };
+
+    this.vendingMachine = {
+      ...newVendingMachine,
+      ...this.vendingMachine,
+    };
 
     return true;
   }

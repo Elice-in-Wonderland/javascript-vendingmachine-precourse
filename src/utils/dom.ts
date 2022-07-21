@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 function $(selector: string, scope = document) {
   return scope.querySelector(selector);
 }
@@ -53,4 +54,20 @@ function emit(target: HTMLElement, typeArg: string, detail: any) {
   target.dispatchEvent(event);
 }
 
-export { $, $$, createElement, on, delegate, emit };
+function getDataSet({ children }: HTMLElement, properties: Iterable<string>) {
+  const obj: Record<string, string> = {};
+
+  for (const property of properties) {
+    for (const child of children) {
+      const nextValue = (child as HTMLElement).dataset[property];
+
+      if (nextValue) {
+        obj[property] = nextValue;
+        break;
+      }
+    }
+  }
+  return obj;
+}
+
+export { $, $$, createElement, on, delegate, emit, getDataSet };

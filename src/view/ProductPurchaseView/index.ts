@@ -1,6 +1,7 @@
+/* eslint-disable no-restricted-syntax */
 import { SELECTOR } from '../../constants';
 import { VendingMachine } from '../../types/vendingMachine';
-import { $, delegate, emit, formDataToObject } from '../../utils';
+import { $, delegate, emit, formDataToObject, getDataSet } from '../../utils';
 import View from '../View';
 import Template from './Template';
 
@@ -45,10 +46,17 @@ class ProductPurchaseView extends View {
     });
   }
 
-  // TODO: 아이템 구매하기 핸들링
   handleProductPurchase(event: Event) {
     event.preventDefault();
-    console.log('TODO');
+
+    const { productName: name, productPrice: price } = getDataSet(
+      (event.target as HTMLButtonElement).closest(SELECTOR.PRODUCT.MANAGE_ITEM),
+      ['productName', 'productPrice'],
+    );
+
+    emit(this.element, '@productPurchase', {
+      product: { name, price: Number(price) },
+    });
   }
 
   // TODO: 반환금 핸드링

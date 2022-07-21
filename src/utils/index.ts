@@ -4,7 +4,7 @@ import {
   formDataToObject,
   every,
 } from './common';
-import { $, $$, createElement, delegate, emit } from './dom';
+import { $, $$, createElement, delegate, emit, getDataSet } from './dom';
 import { isValidProduct, isValidAmount, isEnoughAmount } from './validate';
 
 export {
@@ -17,6 +17,7 @@ export {
   createElement,
   delegate,
   emit,
+  getDataSet,
   isValidProduct,
   isValidAmount,
   isEnoughAmount,

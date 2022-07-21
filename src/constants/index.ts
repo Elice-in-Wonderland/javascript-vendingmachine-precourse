@@ -64,6 +64,7 @@ const ERROR_MESSAGE = Object.freeze({
   AMOUNT_EMPTY: '금액을 입력해주세요. ex) 10000',
   AMOUNT_RANGE:
     '금액은 자연수이면서 금액은 10으로 나누어 떨어져야 합니다. ex) 10000',
+  PRODUCT_PURCHASE_ERROR: '잔액이 부족합니다.',
 });
 
 const COIN_LIST = [500, 100, 50, 10];
