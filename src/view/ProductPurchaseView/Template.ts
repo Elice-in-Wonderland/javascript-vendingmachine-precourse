@@ -60,9 +60,20 @@ class Template {
           ${quantity}
         </td>
         <td class=${removeFirstLetter(SELECTOR.PRODUCT.PURCHASE_BUTTON)}>
+        ${
+          quantity > 0
+            ? `
           <button class=${removeFirstLetter(
             SELECTOR.PRODUCT.PURCHASE_BUTTON,
           )}>구매하기</button>
+        
+        `
+            : `
+          <button disabled class=${removeFirstLetter(
+            SELECTOR.PRODUCT.PURCHASE_BUTTON,
+          )}>구매하기</button>
+        `
+        }
         </td>
       </tr>
     `;
