@@ -176,6 +176,7 @@
   - 상품명은 `dataset` 속성을 사용하고 `data-product-name` 형식으로 저장한다.
   - 가격은 `dataset` 속성을 사용하고 `data-product-price` 형식으로 저장한다.
   - 수량은 `dataset` 속성을 사용하고 `data-product-quantity` 형식으로 저장한다.
+- localStorage를 이용하여, 새로고침하더라도 가장 최근에 작업한 정보들을 불러올 수 있도록 한다.
 
 
 ---
