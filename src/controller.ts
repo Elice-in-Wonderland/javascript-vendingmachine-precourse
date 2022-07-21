@@ -49,6 +49,8 @@ class Controller {
     this.productPurchaseView.on('@productPurchase', (event: Event) =>
       this.handleProductPurchase((event as CustomEvent).detail.product),
     );
+
+    this.productPurchaseView.on('@change', this.handleChange.bind(this));
   }
 
   changeTab(tab: string) {
@@ -76,6 +78,12 @@ class Controller {
 
   handleProductPurchase(product: Pick<Product, 'name' | 'price'>) {
     if (!this.model.productPurchase(product)) return;
+
+    this.productPurchaseView.render(this.model.getVendingMachine());
+  }
+
+  handleChange() {
+    if (!this.model.returnChange()) return;
 
     this.productPurchaseView.render(this.model.getVendingMachine());
   }

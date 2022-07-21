@@ -2,7 +2,7 @@ import { SELECTOR } from '../../constants';
 import { Coin, VendingMachine } from '../../types/vendingMachine';
 import { removeFirstLetter } from '../../utils';
 
-function getCoinsSum(coins: Record<Coin, number>) {
+export function getCoinsSum(coins: Record<Coin, number>) {
   let sum = 0;
 
   Object.entries(coins).forEach(([key, value]) => {

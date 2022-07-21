@@ -59,10 +59,10 @@ class ProductPurchaseView extends View {
     });
   }
 
-  // TODO: 반환금 핸드링
   handleChange(event: Event) {
     event.preventDefault();
-    console.log('TODO');
+
+    emit(this.element, '@change', {});
   }
 
   markUp(vendingMachine: VendingMachine) {

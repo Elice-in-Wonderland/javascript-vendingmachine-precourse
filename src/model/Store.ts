@@ -1,3 +1,5 @@
+/* eslint-disable no-continue */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-param-reassign */
 import { COIN_LIST, ERROR_MESSAGE, SELECTOR } from '../constants';
 import { Product, VendingMachine } from '../types/vendingMachine';
@@ -8,6 +10,7 @@ import {
   isEnoughAmount,
 } from '../utils';
 import { getRandomNumber } from '../utils/randomCoinMaker';
+import { getCoinsSum } from '../view/VendingMachineManageView/Template';
 
 class Store {
   selectedTab: string;
@@ -46,7 +49,6 @@ class Store {
 
     while (insertedAmount > 0) {
       const randomCoin = getRandomNumber(COIN_LIST);
-      // eslint-disable-next-line no-continue
       if (!isEnoughAmount(insertedAmount, randomCoin)) continue;
 
       this.vendingMachine.coins[randomCoin] += 1;
@@ -84,11 +86,71 @@ class Store {
     };
 
     this.vendingMachine = {
-      ...newVendingMachine,
       ...this.vendingMachine,
+      ...newVendingMachine,
     };
 
     return true;
+  }
+
+  returnChange() {
+    const coinsSum = getCoinsSum(this.vendingMachine.coins);
+    const { inputAmount } = this.vendingMachine;
+
+    // TODO: 잔돈 반환 로직 리팩토링
+    // 불변성 지키기?
+    // 다른 방식도 생각
+    if (inputAmount > coinsSum) {
+      this.returnPartOfChange();
+    } else {
+      this.returnAllOfChange();
+    }
+
+    return true;
+  }
+
+  returnPartOfChange() {
+    console.log('줄 수 있는 만큼 반환');
+    let { inputAmount } = this.vendingMachine;
+
+    for (const [unit, count] of Object.entries(this.vendingMachine.coins)) {
+      const coinUnit = Number(unit);
+      inputAmount -= coinUnit * count;
+
+      this.vendingMachine.chargeCoins[coinUnit] += count;
+      this.vendingMachine.coins[coinUnit] = 0;
+    }
+
+    this.vendingMachine = {
+      ...this.vendingMachine,
+      inputAmount,
+    };
+  }
+
+  returnAllOfChange() {
+    console.log('전액 반환');
+    let { inputAmount } = this.vendingMachine;
+
+    for (const [unit, count] of Object.entries(this.vendingMachine.coins)) {
+      const coinUnit = Number(unit);
+      const needCount = Math.floor(inputAmount / coinUnit);
+
+      if (needCount > count) {
+        this.vendingMachine.coins[coinUnit] = 0;
+        this.vendingMachine.chargeCoins[coinUnit] += count;
+        inputAmount -= coinUnit * count;
+      } else {
+        this.vendingMachine.coins[coinUnit] = count - needCount;
+        this.vendingMachine.chargeCoins[coinUnit] += needCount;
+        inputAmount -= coinUnit * needCount;
+      }
+      if (inputAmount === 0) break;
+    }
+
+    this.vendingMachine = {
+      ...this.vendingMachine,
+      inputAmount,
+    };
   }
 
   getProducts() {
