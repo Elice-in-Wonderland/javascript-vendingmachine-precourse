@@ -41,6 +41,10 @@ class Controller {
     this.vendingMachineManageView.on('@addCoins', (event: Event) =>
       this.vendingMachineManageSubmit((event as CustomEvent).detail.amount),
     );
+
+    this.productPurchaseView.on('@inputMoney', (event: Event) =>
+      this.productPurchaseSubmit((event as CustomEvent).detail.amount),
+    );
   }
 
   changeTab(tab: string) {
@@ -49,15 +53,21 @@ class Controller {
   }
 
   productSubmit(product: Partial<Product>) {
-    if(!this.model.addProduct(product)) return;
+    if (!this.model.addProduct(product)) return;
 
     this.productAddView.render(this.model.getProducts());
   }
 
   vendingMachineManageSubmit(amount?: number) {
-    if(!this.model.addCoins(amount)) return;
+    if (!this.model.addCoins(amount)) return;
 
     this.vendingMachineManageView.render(this.model.getVendingMachine());
+  }
+
+  productPurchaseSubmit(amount?: number) {
+    if (!this.model.inputMoney(amount)) return;
+
+    this.productPurchaseView.render(this.model.getVendingMachine());
   }
 
   render() {

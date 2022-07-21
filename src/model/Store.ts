@@ -55,6 +55,14 @@ class Store {
     return true;
   }
 
+  inputMoney(amount?: number) {
+    if (!isValidAmount(amount)) return false;
+
+    this.vendingMachine.inputAmount += amount as number;
+
+    return true;
+  }
+
   getProducts() {
     return this.vendingMachine.products;
   }

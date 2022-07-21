@@ -1,6 +1,6 @@
 import { SELECTOR } from '../../constants';
 import { VendingMachine } from '../../types/vendingMachine';
-import { $, delegate } from '../../utils';
+import { $, delegate, emit, formDataToObject } from '../../utils';
 import View from '../View';
 import Template from './Template';
 
@@ -33,10 +33,16 @@ class ProductPurchaseView extends View {
     );
   }
 
-  // TODO: 투입금 핸들링
   handleSubmit(event: Event) {
     event.preventDefault();
-    console.log('TODO');
+
+    const { amount } = formDataToObject(
+      new FormData(event.target as HTMLFormElement),
+    );
+
+    emit(this.element, '@inputMoney', {
+      amount: amount ? Number(amount) : undefined,
+    });
   }
 
   // TODO: 아이템 구매하기 핸들링
