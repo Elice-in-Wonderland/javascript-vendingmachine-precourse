@@ -39,10 +39,9 @@ class Store {
   addProduct(product: Partial<Product>) {
     if (!isValidProduct(product, this.vendingMachine.products)) return false;
 
-    this.vendingMachine.products = [
-      product as Product,
-      ...this.vendingMachine.products,
-    ];
+    this.setVendingMachine({
+      products: [product as Product, ...this.vendingMachine.products],
+    });
 
     return true;
   }
@@ -51,14 +50,19 @@ class Store {
     if (!isValidAmount(amount)) return false;
 
     let insertedAmount = amount as number;
+    const newCoins = { ...this.vendingMachine.coins };
 
     while (insertedAmount > 0) {
       const randomCoin = getRandomNumber(COIN_LIST);
       if (!isEnoughAmount(insertedAmount, randomCoin)) continue;
 
-      this.vendingMachine.coins[randomCoin] += 1;
+      newCoins[randomCoin] += 1;
       insertedAmount -= randomCoin;
     }
+
+    this.setVendingMachine({
+      coins: newCoins,
+    });
 
     return true;
   }
@@ -66,7 +70,9 @@ class Store {
   inputMoney(amount?: number) {
     if (!isValidAmount(amount)) return false;
 
-    this.vendingMachine.inputAmount += amount as number;
+    this.setVendingMachine({
+      inputAmount: this.vendingMachine.inputAmount + (amount as number),
+    });
 
     return true;
   }
@@ -79,8 +85,8 @@ class Store {
       return false;
     }
 
-    const newVendingMachine = {
-      inputAmount: (this.vendingMachine.inputAmount -= price),
+    this.setVendingMachine({
+      inputAmount: this.vendingMachine.inputAmount - price,
       products: this.vendingMachine.products.map((oldProduct) => {
         if (oldProduct.name === name) {
           oldProduct.quantity -= 1;
@@ -88,12 +94,7 @@ class Store {
 
         return oldProduct;
       }),
-    };
-
-    this.vendingMachine = {
-      ...this.vendingMachine,
-      ...newVendingMachine,
-    };
+    });
 
     return true;
   }
