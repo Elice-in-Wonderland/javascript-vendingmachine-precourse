@@ -28,7 +28,7 @@ class Store {
       inputAmount: 0,
       coins: { 500: 0, 100: 0, 50: 0, 10: 0 },
       products: [{ name: 'test', price: 5000, quantity: 5 }],
-      chargeCoins: { 500: 0, 100: 0, 50: 0, 10: 0 },
+      changeCoins: { 500: 0, 100: 0, 50: 0, 10: 0 },
     };
   }
 
@@ -114,7 +114,7 @@ class Store {
   returnPartOfChange() {
     let { inputAmount } = this.vendingMachine;
     const newCoins = { ...this.vendingMachine.coins };
-    const newChargeCoins = { ...this.vendingMachine.chargeCoins };
+    const newchangeCoins = { ...this.vendingMachine.changeCoins };
 
     for (const [unit, count] of descendingOrder(
       entries(this.vendingMachine.coins),
@@ -122,21 +122,21 @@ class Store {
       const coinUnit = unit;
 
       newCoins[coinUnit] = 0;
-      newChargeCoins[coinUnit] += count;
+      newchangeCoins[coinUnit] += count;
       inputAmount -= coinUnit * count;
     }
 
     this.setVendingMachine({
       inputAmount,
       coins: newCoins,
-      chargeCoins: newChargeCoins,
+      changeCoins: newchangeCoins,
     });
   }
 
   returnAllOfChange() {
     let { inputAmount } = this.vendingMachine;
     const newCoins = { ...this.vendingMachine.coins };
-    const newChargeCoins = { ...this.vendingMachine.chargeCoins };
+    const newchangeCoins = { ...this.vendingMachine.changeCoins };
 
     for (const [unit, count] of descendingOrder(
       entries(this.vendingMachine.coins),
@@ -148,14 +148,14 @@ class Store {
       const amount = Math.min(count, needCount);
 
       newCoins[coinUnit] = count - amount;
-      newChargeCoins[coinUnit] += amount;
+      newchangeCoins[coinUnit] += amount;
       inputAmount -= coinUnit * amount;
     }
 
     this.setVendingMachine({
       inputAmount,
       coins: newCoins,
-      chargeCoins: newChargeCoins,
+      changeCoins: newchangeCoins,
     });
   }
 

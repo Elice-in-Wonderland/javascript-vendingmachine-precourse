@@ -20,7 +20,7 @@ class Template {
         )}>${vendingMachine.inputAmount}원</span></p>
       </section>
       ${this.getProductList(vendingMachine.products)}
-      ${this.getChange(vendingMachine.chargeCoins)}
+      ${this.getChange(vendingMachine.changeCoins)}
     `;
   }
 
