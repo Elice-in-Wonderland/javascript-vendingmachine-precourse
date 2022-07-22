@@ -5,6 +5,7 @@ import {
   every,
 } from './common';
 import { $, $$, createElement, delegate, emit, getDataSet } from './dom';
+import { getItem, removeItem, setItem } from './localStorage';
 import { isValidProduct, isValidAmount, isEnoughAmount } from './validate';
 
 export {
@@ -21,4 +22,7 @@ export {
   isValidProduct,
   isValidAmount,
   isEnoughAmount,
+  getItem,
+  setItem,
+  removeItem,
 };

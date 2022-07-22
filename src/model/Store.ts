@@ -8,6 +8,8 @@ import {
   isValidProduct,
   removeFirstLetter,
   isEnoughAmount,
+  setItem,
+  getItem,
 } from '../utils';
 import { entries } from '../utils/common';
 import { getRandomNumber } from '../utils/randomCoinMaker';
@@ -17,6 +19,13 @@ function descendingOrder(arr: Array<[number, number]>) {
   return arr.sort((a, b) => b[0] - a[0]);
 }
 
+const initVendingMachine = {
+  inputAmount: 0,
+  coins: { 500: 0, 100: 0, 50: 0, 10: 0 },
+  products: [],
+  changeCoins: { 500: 0, 100: 0, 50: 0, 10: 0 },
+};
+
 class Store {
   selectedTab: string;
 
@@ -24,12 +33,7 @@ class Store {
 
   constructor() {
     this.selectedTab = removeFirstLetter(SELECTOR.TAB_MENU.PRODUCT_ADD); // 처음 시작할 탭
-    this.vendingMachine = {
-      inputAmount: 0,
-      coins: { 500: 0, 100: 0, 50: 0, 10: 0 },
-      products: [{ name: 'test', price: 5000, quantity: 5 }],
-      changeCoins: { 500: 0, 100: 0, 50: 0, 10: 0 },
-    };
+    this.vendingMachine = getItem('vendingMachine') || initVendingMachine;
   }
 
   setSelectedTab(tab: string) {
@@ -173,6 +177,8 @@ class Store {
       ...this.vendingMachine,
       ...partOfVendingMachine,
     };
+
+    setItem('vendingMachine', this.vendingMachine);
   }
 }
 
