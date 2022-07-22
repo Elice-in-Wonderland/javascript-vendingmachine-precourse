@@ -29,7 +29,7 @@ class Template {
         </form>
         <p>보유 금액: <span id=${removeFirstLetter(
           SELECTOR.VENDING_MACHINE_MANAGE.CHARGE_AMOUNT,
-        )}>${getCoinsSum(vendingMachine.coins)}원</span></p>
+        )}>${getCoinsSum(vendingMachine.coins)}</span></p>
       </section>
       ${this.getCoinList(vendingMachine)}
     `;

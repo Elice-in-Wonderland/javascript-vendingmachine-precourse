@@ -17,7 +17,7 @@ class Template {
         </form>
         <p>투입한 금액: <span id=${removeFirstLetter(
           SELECTOR.PRODUCT_PURCHASE.CHARGE_AMOUNT,
-        )}>${vendingMachine.inputAmount}원</span></p>
+        )}>${vendingMachine.inputAmount}</span></p>
       </section>
       ${this.getProductList(vendingMachine.products)}
       ${this.getChange(vendingMachine.changeCoins)}
@@ -44,23 +44,16 @@ class Template {
         <td 
           data-product-name=${name} 
           class=${removeFirstLetter(SELECTOR.PRODUCT.PURCHASE_NAME)}
-        >
-          ${name}
-        </td>
+        >${name}</td>
         <td 
           data-product-price=${price} 
           class=${removeFirstLetter(SELECTOR.PRODUCT.PURCHASE_PRICE)}
-        >
-          ${price}
-        </td>
+        >${price}</td>
         <td 
           data-product-quantity=${quantity} 
           class=${removeFirstLetter(SELECTOR.PRODUCT.PURCHASE_QUANTITY)}
-        >
-          ${quantity}
-        </td>
-        <td class=${removeFirstLetter(SELECTOR.PRODUCT.PURCHASE_BUTTON)}>
-        ${
+        >${quantity}</td>
+        <td>${
           quantity > 0
             ? `
           <button class=${removeFirstLetter(
@@ -73,8 +66,7 @@ class Template {
             SELECTOR.PRODUCT.PURCHASE_BUTTON,
           )}>구매하기</button>
         `
-        }
-        </td>
+        }</td>
       </tr>
     `;
   }
