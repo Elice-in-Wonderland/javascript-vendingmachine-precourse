@@ -121,10 +121,9 @@ class Store {
       this.vendingMachine.coins[coinUnit] = 0;
     }
 
-    this.vendingMachine = {
-      ...this.vendingMachine,
+    this.setVendingMachine({
       inputAmount,
-    };
+    });
   }
 
   returnAllOfChange() {
@@ -132,25 +131,20 @@ class Store {
     let { inputAmount } = this.vendingMachine;
 
     for (const [unit, count] of Object.entries(this.vendingMachine.coins)) {
+      if (inputAmount === 0) break;
+
       const coinUnit = Number(unit);
       const needCount = Math.floor(inputAmount / coinUnit);
+      const amount = Math.min(count, needCount);
 
-      if (needCount > count) {
-        this.vendingMachine.coins[coinUnit] = 0;
-        this.vendingMachine.chargeCoins[coinUnit] += count;
-        inputAmount -= coinUnit * count;
-      } else {
-        this.vendingMachine.coins[coinUnit] = count - needCount;
-        this.vendingMachine.chargeCoins[coinUnit] += needCount;
-        inputAmount -= coinUnit * needCount;
-      }
-      if (inputAmount === 0) break;
+      this.vendingMachine.coins[coinUnit] = count - amount;
+      this.vendingMachine.chargeCoins[coinUnit] += amount;
+      inputAmount -= coinUnit * amount;
     }
 
-    this.vendingMachine = {
-      ...this.vendingMachine,
+    this.setVendingMachine({
       inputAmount,
-    };
+    });
   }
 
   getProducts() {
@@ -159,6 +153,13 @@ class Store {
 
   getVendingMachine() {
     return this.vendingMachine;
+  }
+
+  setVendingMachine(partOfVendingMachine: Partial<VendingMachine>) {
+    this.vendingMachine = {
+      ...this.vendingMachine,
+      ...partOfVendingMachine,
+    };
   }
 }
 
