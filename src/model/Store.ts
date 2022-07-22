@@ -9,8 +9,13 @@ import {
   removeFirstLetter,
   isEnoughAmount,
 } from '../utils';
+import { entries } from '../utils/common';
 import { getRandomNumber } from '../utils/randomCoinMaker';
 import { getCoinsSum } from '../view/VendingMachineManageView/Template';
+
+function descendingOrder(arr: Array<[number, number]>) {
+  return arr.sort((a, b) => b[0] - a[0]);
+}
 
 class Store {
   selectedTab: string;
@@ -97,9 +102,6 @@ class Store {
     const coinsSum = getCoinsSum(this.vendingMachine.coins);
     const { inputAmount } = this.vendingMachine;
 
-    // TODO: 잔돈 반환 로직 리팩토링
-    // 불변성 지키기?
-    // 다른 방식도 생각
     if (inputAmount > coinsSum) {
       this.returnPartOfChange();
     } else {
@@ -110,40 +112,50 @@ class Store {
   }
 
   returnPartOfChange() {
-    console.log('줄 수 있는 만큼 반환');
     let { inputAmount } = this.vendingMachine;
+    const newCoins = { ...this.vendingMachine.coins };
+    const newChargeCoins = { ...this.vendingMachine.chargeCoins };
 
-    for (const [unit, count] of Object.entries(this.vendingMachine.coins)) {
-      const coinUnit = Number(unit);
+    for (const [unit, count] of descendingOrder(
+      entries(this.vendingMachine.coins),
+    )) {
+      const coinUnit = unit;
+
+      newCoins[coinUnit] = 0;
+      newChargeCoins[coinUnit] += count;
       inputAmount -= coinUnit * count;
-
-      this.vendingMachine.chargeCoins[coinUnit] += count;
-      this.vendingMachine.coins[coinUnit] = 0;
     }
 
     this.setVendingMachine({
       inputAmount,
+      coins: newCoins,
+      chargeCoins: newChargeCoins,
     });
   }
 
   returnAllOfChange() {
-    console.log('전액 반환');
     let { inputAmount } = this.vendingMachine;
+    const newCoins = { ...this.vendingMachine.coins };
+    const newChargeCoins = { ...this.vendingMachine.chargeCoins };
 
-    for (const [unit, count] of Object.entries(this.vendingMachine.coins)) {
+    for (const [unit, count] of descendingOrder(
+      entries(this.vendingMachine.coins),
+    )) {
       if (inputAmount === 0) break;
 
-      const coinUnit = Number(unit);
+      const coinUnit = unit;
       const needCount = Math.floor(inputAmount / coinUnit);
       const amount = Math.min(count, needCount);
 
-      this.vendingMachine.coins[coinUnit] = count - amount;
-      this.vendingMachine.chargeCoins[coinUnit] += amount;
+      newCoins[coinUnit] = count - amount;
+      newChargeCoins[coinUnit] += amount;
       inputAmount -= coinUnit * amount;
     }
 
     this.setVendingMachine({
       inputAmount,
+      coins: newCoins,
+      chargeCoins: newChargeCoins,
     });
   }
 

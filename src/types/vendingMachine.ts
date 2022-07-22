@@ -16,4 +16,8 @@ interface Product {
   quantity: number;
 }
 
-export { Coin, VendingMachine, Product };
+type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
+export { Coin, VendingMachine, Product, Entries };

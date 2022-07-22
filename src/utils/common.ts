@@ -1,3 +1,5 @@
+import { Entries } from '../types/vendingMachine';
+
 export type FormDataObj = Record<string, string | undefined>;
 
 const isFreezableObj = (value: any) =>
@@ -32,4 +34,6 @@ const every = <T>(f: (arg: T) => boolean, iter: any) => {
   return true;
 };
 
-export { deepFreeze, removeFirstLetter, formDataToObject, every };
+const entries = <T>(obj: T): Entries<T> => Object.entries(obj) as any;
+
+export { deepFreeze, removeFirstLetter, formDataToObject, every, entries };
