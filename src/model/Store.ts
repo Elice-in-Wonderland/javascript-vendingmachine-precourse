@@ -13,7 +13,6 @@ import {
 } from '../utils';
 import { entries } from '../utils/common';
 import { getRandomNumber } from '../utils/randomCoinMaker';
-import { getCoinsSum } from '../view/VendingMachineManageView/Template';
 
 function descendingOrder(arr: Array<[number, number]>) {
   return arr.sort((a, b) => b[0] - a[0]);
@@ -104,41 +103,11 @@ class Store {
   }
 
   returnChange() {
-    const coinsSum = getCoinsSum(this.vendingMachine.coins);
-    const { inputAmount } = this.vendingMachine;
-
-    if (inputAmount > coinsSum) {
-      this.returnPartOfChange();
-    } else {
-      this.returnAllOfChange();
-    }
-
+    this.calculateChange();
     return true;
   }
 
-  returnPartOfChange() {
-    let { inputAmount } = this.vendingMachine;
-    const newCoins = { ...this.vendingMachine.coins };
-    const newChangeCoins = { ...this.vendingMachine.changeCoins };
-
-    for (const [unit, count] of descendingOrder(
-      entries(this.vendingMachine.coins),
-    )) {
-      const coinUnit = unit;
-
-      newCoins[coinUnit] = 0;
-      newChangeCoins[coinUnit] += count;
-      inputAmount -= coinUnit * count;
-    }
-
-    this.setVendingMachine({
-      inputAmount,
-      coins: newCoins,
-      changeCoins: newChangeCoins,
-    });
-  }
-
-  returnAllOfChange() {
+  calculateChange() {
     let { inputAmount } = this.vendingMachine;
     const newCoins = { ...this.vendingMachine.coins };
     const newChangeCoins = { ...this.vendingMachine.changeCoins };
