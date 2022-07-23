@@ -1,11 +1,11 @@
 class View {
-  protected container = document.createElement("div");
+  protected container: HTMLElement = document.createElement("div");
 
   constructor() {
     this.container.innerHTML = this.template();
   }
 
-  public template() {
+  protected template() {
     return ``;
   }
 

@@ -6,4 +6,4 @@ class ProductPurchaseView extends View {
   }
 }
 
-export default new ProductPurchaseView();
+export default ProductPurchaseView;

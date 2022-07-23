@@ -6,4 +6,4 @@ class MachineCoinManageView extends View {
   }
 }
 
-export default new MachineCoinManageView();
+export default MachineCoinManageView;

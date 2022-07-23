@@ -2,8 +2,9 @@ import View from "./View";
 
 class ViewController extends View {
   public changeView(target: string) {}
-  private state = {};
-  private setState() {}
+  protected state = {};
+  protected setState(nextState: {}) {}
+  protected setEvent(callback?: any) {}
 }
 
 export default ViewController;

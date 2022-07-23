@@ -1,4 +1,4 @@
-function $(selector: string, parent = document) {
+function $(selector: string, parent: any = document) {
   return parent.querySelector(selector);
 }
 
