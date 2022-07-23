@@ -30,10 +30,10 @@ class ProductAddView extends View {
                 ${this.products
                   .map(
                     (product) => `
-                        <tr align="center">
-                            <td>${product.getName()}</td>
-                            <td>${product.getPrice()}</td>
-                            <td>${product.getQuantity()}</td>
+                        <tr class="product-manage-item" align="center">
+                            <td class="product-manage-name">${product.getName()}</td>
+                            <td class="product-manage-price">${product.getPrice()}</td>
+                            <td class="product-manage-quantity">${product.getQuantity()}</td>
                         </tr>
                     `
                   )

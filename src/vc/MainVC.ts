@@ -54,6 +54,9 @@ class MainVC extends ViewController {
       if (!(target instanceof HTMLElement)) return;
       if (target.id === "product-add-button") this.addProduct();
       if (target.id === "vending-machine-charge-button") this.addMachineMoney();
+      if (target.id === "charge-button") this.addUserMoney();
+      if (target.id === "purchase-button") this.purchaseProduct();
+      if (target.id === "coin-return-button") this.getReturnMoney();
     });
   }
 
@@ -79,6 +82,18 @@ class MainVC extends ViewController {
     newState.coins.setCoinsByMoney(money);
     this.setState(newState);
   }
+
+  private addUserMoney() {
+    const money = Number($("#charge-input", this.getContainer()).value);
+    if (!(money % 10 === 0)) return;
+    const newState = { ...this.state };
+    newState.money += money;
+    this.setState(newState);
+  }
+
+  private purchaseProduct() {}
+
+  private getReturnMoney() {}
 
   protected override state: IState = {
     coins: new Coins(),
