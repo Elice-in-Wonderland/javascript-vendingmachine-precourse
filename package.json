@@ -2,12 +2,20 @@
   "name": "javascript-vendingmachine-precourse",
   "version": "1.0.0",
   "description": "우아한테크코스 프리코스 자판기 미션",
-  "dependencies": {},
   "devDependencies": {
-    "cypress": "8.7.0"
+    "cypress": "8.7.0",
+    "html-webpack-plugin": "^5.5.0",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3",
+    "webpack-merge": "^5.8.0"
   },
   "scripts": {
-    "test": "cypress run --browser chrome"
+    "test": "cypress run --browser chrome",
+    "start": "webpack server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
