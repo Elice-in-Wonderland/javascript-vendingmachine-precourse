@@ -7,13 +7,12 @@ class App {
   root: HTMLDivElement;
   HeaderVC: HeaderVC;
   MainVC: MainVC;
-  selectedTab: TabType | "";
+  selectedTab!: TabType;
 
   constructor() {
     this.root = $("#app") as HTMLDivElement;
     this.HeaderVC = new HeaderVC(this.onSelectTab.bind(this));
     this.MainVC = new MainVC();
-    this.selectedTab = "";
     this.render();
   }
 

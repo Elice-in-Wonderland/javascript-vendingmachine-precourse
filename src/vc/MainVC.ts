@@ -2,6 +2,7 @@ import ViewController from "../Component/ViewController";
 import ProductAddView from "../view/ProductAddView";
 import ProductPurchaseView from "../view/ProductPurchaseView";
 import MachineCoinManageView from "../view/MachineCoinManageView";
+import Coins from "../model/Coins";
 import { $ } from "../util/index";
 import Product from "../model/Product";
 
@@ -16,11 +17,9 @@ export type TProduct = {
   quantity: number;
 };
 
-export type Tproducts = Array<Product>;
-
 export interface IState {
-  coins: [];
-  products: Tproducts;
+  coins: Coins;
+  products: Array<Product>;
   money: number;
 }
 
@@ -51,25 +50,38 @@ class MainVC extends ViewController {
   }
 
   protected override setEvent(): void {
-    this.container.addEventListener("click", (event) => {
-      if (!(event.target instanceof HTMLElement)) return;
-      if (event.target.id === "product-add-button") this.addProduct(event);
+    this.container.addEventListener("click", ({ target }) => {
+      if (!(target instanceof HTMLElement)) return;
+      if (target.id === "product-add-button") this.addProduct();
+      if (target.id === "vending-machine-charge-button") this.addMachineMoney();
     });
   }
 
-  private addProduct(event: Event) {
-    event.preventDefault();
+  private addProduct() {
     const name = $("#product-name-input", this.getContainer()).value;
-    const price = $("#product-price-input", this.getContainer()).value;
-    const quantity = $("#product-quantity-input", this.getContainer()).value;
+    const price = Number($("#product-price-input", this.getContainer()).value);
+    const quantity = Number(
+      $("#product-quantity-input", this.getContainer()).value
+    );
+    if (!name || !price || !quantity) return;
     const product = new Product({ name, price, quantity });
     const newState = { ...this.state };
     newState.products.push(product);
     this.setState(newState);
   }
 
+  private addMachineMoney() {
+    const money = Number(
+      $("#vending-machine-charge-input", this.getContainer()).value
+    );
+    if (!(money % 10 === 0)) return;
+    const newState = { ...this.state };
+    newState.coins.setCoinsByMoney(money);
+    this.setState(newState);
+  }
+
   protected override state: IState = {
-    coins: [],
+    coins: new Coins(),
     products: [],
     money: 0,
   };

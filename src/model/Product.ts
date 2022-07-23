@@ -21,7 +21,7 @@ class Product {
   public getPrice() {
     return this.price;
   }
-  public getquantity() {
+  public getQuantity() {
     return this.quantity;
   }
 }

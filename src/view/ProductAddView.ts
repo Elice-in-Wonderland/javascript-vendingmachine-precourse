@@ -1,8 +1,9 @@
 import View from "../Component/View";
-import { IState, Tproducts } from "../vc/MainVC";
+import Product from "../model/Product";
+import { IState } from "../vc/MainVC";
 
 class ProductAddView extends View {
-  products: Tproducts = [];
+  products: Array<Product>;
 
   constructor(props: IState) {
     super();
@@ -11,15 +12,14 @@ class ProductAddView extends View {
   }
 
   public override template(): string {
+    if (!this.products) return ``;
     return `
         <div>
             <h2>상품 추가하기</h2>
-            <form>
-                <input id="product-name-input"></input>
-                <input id="product-price-input"></input>
-                <input id="product-quantity-input"></input>
-                <button id="product-add-button">추가하기</button>
-            </form>
+            <input id="product-name-input"></input>
+            <input id="product-price-input"></input>
+            <input id="product-quantity-input"></input>
+            <button id="product-add-button">추가하기</button>
         </div>
         <div>
             <h2>상품 현황</h2>
@@ -27,20 +27,17 @@ class ProductAddView extends View {
                 <th align="center">상품명</th>
                 <th align="center">가격</th>
                 <th align="center">수량</th>
-                ${
-                  this.products &&
-                  this.products
-                    .map(
-                      (product) => `
+                ${this.products
+                  .map(
+                    (product) => `
                         <tr align="center">
                             <td>${product.getName()}</td>
                             <td>${product.getPrice()}</td>
-                            <td>${product.getquantity()}</td>
+                            <td>${product.getQuantity()}</td>
                         </tr>
                     `
-                    )
-                    .join("")
-                }
+                  )
+                  .join("")}
             </table>
         </div>
     `;
