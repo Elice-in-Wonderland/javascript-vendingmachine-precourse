@@ -34,13 +34,15 @@ class ProductPurchaseView extends View {
           <th align="center">구매</th>
           ${this.products
             .map(
-              (product) => `
+              (product, idx) => `
                   <tr class="product-purchase-item" align="center">
                       <td data-product-name class="product-purchase-name">${product.getName()}</td>
                       <td data-product-price class="product-purchase-price">${product.getPrice()}</td>
                       <td data-product-quantity class="product-purchase-quantity">${product.getQuantity()}</td>
                       <td>
-                        <button class="purchase-button">구매하기</button>
+                        <button data-id=${idx} class="purchase-button" ${
+                product.getQuantity() === 0 && "disabled"
+              }>구매하기</button>
                       </td>
                   </tr>
               `

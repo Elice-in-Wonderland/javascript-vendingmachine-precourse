@@ -55,7 +55,7 @@ class MainVC extends ViewController {
       if (target.id === "product-add-button") this.addProduct();
       if (target.id === "vending-machine-charge-button") this.addMachineMoney();
       if (target.id === "charge-button") this.addUserMoney();
-      if (target.id === "purchase-button") this.purchaseProduct();
+      if (target.className === "purchase-button") this.purchaseProduct(target);
       if (target.id === "coin-return-button") this.getReturnMoney();
     });
   }
@@ -91,7 +91,16 @@ class MainVC extends ViewController {
     this.setState(newState);
   }
 
-  private purchaseProduct() {}
+  private purchaseProduct(target: HTMLElement) {
+    const { id }: any = target.dataset;
+    const newState = { ...this.state };
+    const price = newState.products[id].getPrice();
+    const quantity = newState.products[id].getQuantity();
+    if (newState.money < price || quantity <= 0) return;
+    newState.money -= price;
+    newState.products[id].minusQuantity();
+    this.setState(newState);
+  }
 
   private getReturnMoney() {}
 

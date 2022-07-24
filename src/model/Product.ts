@@ -15,6 +15,11 @@ class Product {
     this.quantity = quantity;
   }
 
+  public minusQuantity() {
+    if (this.quantity <= 0) return;
+    this.quantity -= 1;
+  }
+
   public getName() {
     return this.name;
   }
