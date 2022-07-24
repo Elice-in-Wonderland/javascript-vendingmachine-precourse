@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "strict": true, // 엄격모드
+        "lib": ["ES6", "dom"], // 코드가 실행될 환경. 브라우저에서 실행한다면 DOM 추가. 자동완성 기능 제공.
+        "target": "ES6", // 변환될 자바스크립트 버젼. 모든 최신브라우저는 ES6를 지원하므로, ES6 권장.
+        "outDir": "dist", // 결과물 저장될 폴더
+    },
+    "exclude": ["node_modules"], // 제외
+    "include": ["src"] // 변환할 파일 혹은 폴더
+}
