@@ -13,6 +13,7 @@ class MachineCoinManageView extends View {
 
   public override template(): string {
     if (!this.coins) return ``;
+    const { coin_500, coin_100, coin_50, coin_10 } = this.coins.getAllCoins();
     return `
       <div>
         <h2>자판기 동전 충전하기</h2>
@@ -27,19 +28,19 @@ class MachineCoinManageView extends View {
           <th align="center">개수</th>
           <tr id="vending-machine-coin-500-quantity">
             <th>500원</th>
-            <td align="center">${this.coins.get_500()}개</td>
+            <td align="center">${coin_500}개</td>
           </tr>
           <tr id="vending-machine-coin-100-quantity">
             <th>100원</th>
-            <td align="center">${this.coins.get_100()}개</td>
+            <td align="center">${coin_100}개</td>
           </tr>
           <tr id="vending-machine-coin-50-quantity">
             <th>50원</th>
-            <td align="center">${this.coins.get_50()}개</td>
+            <td align="center">${coin_50}개</td>
           </tr>
           <tr id="vending-machine-coin-10-quantity">
             <th>10원</th>
-            <td align="center">${this.coins.get_10()}개</td>
+            <td align="center">${coin_10}개</td>
           </tr>
         </table>
       </div>

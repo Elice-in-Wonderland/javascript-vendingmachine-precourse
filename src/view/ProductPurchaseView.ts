@@ -6,6 +6,12 @@ import { IState } from "../vc/MainVC";
 class ProductPurchaseView extends View {
   money: number;
   coins: Coins;
+  returnedCoins: {
+    coin_500: number;
+    coin_100: number;
+    coin_50: number;
+    coin_10: number;
+  };
   products: Array<Product>;
 
   constructor(props: IState) {
@@ -13,11 +19,13 @@ class ProductPurchaseView extends View {
     this.money = props.money;
     this.coins = props.coins;
     this.products = props.products;
+    this.returnedCoins = props.returnedCoins;
     this.container.innerHTML = this.template();
   }
 
   public override template(): string {
     if (!this.coins || !this.products) return ``;
+    const { coin_500, coin_100, coin_50, coin_10 } = this.returnedCoins;
     return `
       <div>
         <h2>금액 투입</h2>
@@ -58,19 +66,19 @@ class ProductPurchaseView extends View {
           <th align="center">개수</th>
           <tr>
             <th>500원</th>
-            <td id="coin-500-quantity" align="center"></td>
+            <td id="coin-500-quantity" align="center">${coin_500}</td>
           </tr>
           <tr>
             <th>100원</th>
-            <td id="coin-100-quantity" align="center"></td>
+            <td id="coin-100-quantity" align="center">${coin_100}</td>
           </tr>
           <tr>
             <th>50원</th>
-            <td id="coin-50-quantity" align="center"></td>
+            <td id="coin-50-quantity" align="center">${coin_50}</td>
           </tr>
           <tr>
             <th>10원</th>
-            <td id="coin-10-quantity" align="center"></td>
+            <td id="coin-10-quantity" align="center">${coin_10}</td>
           </tr>
       </div>
     `;

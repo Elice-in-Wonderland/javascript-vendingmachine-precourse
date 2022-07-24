@@ -19,6 +19,12 @@ export type TProduct = {
 
 export interface IState {
   coins: Coins;
+  returnedCoins: {
+    coin_500: number;
+    coin_100: number;
+    coin_50: number;
+    coin_10: number;
+  };
   products: Array<Product>;
   money: number;
 }
@@ -56,7 +62,7 @@ class MainVC extends ViewController {
       if (target.id === "vending-machine-charge-button") this.addMachineMoney();
       if (target.id === "charge-button") this.addUserMoney();
       if (target.className === "purchase-button") this.purchaseProduct(target);
-      if (target.id === "coin-return-button") this.getReturnMoney();
+      if (target.id === "coin-return-button") this.getReturnedCoins();
     });
   }
 
@@ -102,11 +108,17 @@ class MainVC extends ViewController {
     this.setState(newState);
   }
 
-  private getReturnMoney() {}
+  private getReturnedCoins() {
+    const newState = { ...this.state };
+    newState.returnedCoins = newState.coins.getReturnedCoins(newState.money);
+    newState.money = 0;
+    this.setState(newState);
+  }
 
   protected override state: IState = {
     coins: new Coins(),
     products: [],
+    returnedCoins: { coin_500: 0, coin_100: 0, coin_50: 0, coin_10: 0 },
     money: 0,
   };
 
