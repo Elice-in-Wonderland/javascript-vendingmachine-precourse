@@ -1,6 +1,6 @@
 import { SELECTOR } from '../../constants';
 import { Product } from '../../types/vendingMachine';
-import { removeFirstLetter } from '../../utils';
+import { removeFirstLetter } from '../../utils/common';
 
 class Template {
   getProductAdd(products: Product[]) {

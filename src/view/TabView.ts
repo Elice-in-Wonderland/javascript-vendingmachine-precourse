@@ -1,5 +1,6 @@
 import { SELECTOR } from '../constants';
-import { $, removeFirstLetter, delegate, emit } from '../utils';
+import { removeFirstLetter } from '../utils/common';
+import { $, delegate, emit } from '../utils/dom';
 import View from './View';
 
 class TabView extends View {

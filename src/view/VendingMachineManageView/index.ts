@@ -1,6 +1,7 @@
 import { SELECTOR } from '../../constants';
 import { VendingMachine } from '../../types/vendingMachine';
-import { $, delegate, emit, formDataToObject } from '../../utils';
+import { formDataToObject } from '../../utils/common';
+import { $, delegate, emit } from '../../utils/dom';
 import View from '../View';
 import Template from './Template';
 

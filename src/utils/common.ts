@@ -1,4 +1,6 @@
-import { Entries } from '../types/vendingMachine';
+export type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
 
 export type FormDataObj = Record<string, string | undefined>;
 

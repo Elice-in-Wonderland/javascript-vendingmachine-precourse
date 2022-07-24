@@ -1,7 +1,8 @@
 /* eslint-disable no-restricted-syntax */
 import { SELECTOR } from '../../constants';
 import { VendingMachine } from '../../types/vendingMachine';
-import { $, delegate, emit, formDataToObject, getDataSet } from '../../utils';
+import { formDataToObject } from '../../utils/common';
+import { $, delegate, emit, getDataSet } from '../../utils/dom';
 import View from '../View';
 import Template from './Template';
 

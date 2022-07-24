@@ -1,6 +1,6 @@
 import { SELECTOR } from '../../constants';
 import { Coin, Product, VendingMachine } from '../../types/vendingMachine';
-import { removeFirstLetter } from '../../utils';
+import { removeFirstLetter } from '../../utils/common';
 
 class Template {
   getProductPurchaseView(vendingMachine: VendingMachine) {

@@ -1,6 +1,6 @@
 import { SELECTOR } from '../../constants';
 import { Coin, VendingMachine } from '../../types/vendingMachine';
-import { removeFirstLetter } from '../../utils';
+import { removeFirstLetter } from '../../utils/common';
 
 export function getCoinsSum(coins: Record<Coin, number>) {
   let sum = 0;

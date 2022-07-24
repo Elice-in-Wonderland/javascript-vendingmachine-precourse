@@ -3,16 +3,14 @@
 /* eslint-disable no-param-reassign */
 import { COIN_LIST, ERROR_MESSAGE, SELECTOR } from '../constants';
 import { Product, VendingMachine } from '../types/vendingMachine';
+import { entries, removeFirstLetter } from '../utils/common';
+import { getItem, setItem } from '../utils/localStorage';
+import { getRandomNumber } from '../utils/randomCoinMaker';
 import {
+  isEnoughAmount,
   isValidAmount,
   isValidProduct,
-  removeFirstLetter,
-  isEnoughAmount,
-  setItem,
-  getItem,
-} from '../utils';
-import { entries } from '../utils/common';
-import { getRandomNumber } from '../utils/randomCoinMaker';
+} from '../utils/validate';
 
 function descendingOrder(arr: Array<[number, number]>) {
   return arr.sort((a, b) => b[0] - a[0]);

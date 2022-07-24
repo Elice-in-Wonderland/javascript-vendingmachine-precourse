@@ -1,11 +1,12 @@
 import { SELECTOR } from './constants';
 import Controller from './controller';
 import Store from './model/Store';
-import { $, createElement, removeFirstLetter } from './utils';
 import TabView from './view/TabView';
 import ProductAddView from './view/ProductAddView';
 import VendingMachineManageView from './view/VendingMachineManageView';
 import ProductPurchaseView from './view/ProductPurchaseView';
+import { $, createElement } from './utils/dom';
+import { removeFirstLetter } from './utils/common';
 
 function initDom() {
   ($(SELECTOR.ROOT) as HTMLDivElement).appendChild(
