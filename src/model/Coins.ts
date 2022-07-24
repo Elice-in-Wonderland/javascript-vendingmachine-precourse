@@ -5,6 +5,7 @@ class Coins {
   private coin_10 = 0;
 
   public setCoinsByMoney(money: number) {
+    // TODO: 랜덤함수 구현
     if (money >= 500) {
       this.coin_500 += ~~(money / 500);
       money = money % 500;
