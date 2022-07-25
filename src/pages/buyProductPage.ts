@@ -5,12 +5,13 @@ class BuyProductPage {
 
   constructor(pageElement: HTMLElement) {
     this.pageElement = pageElement;
-    this.addBuyProductPageElement(this.createBuyProductPageElement());
   }
 
   createBuyProductPageElement(): HTMLElement {
     const newNode: HTMLElement = domCreator('div');
-    newNode.innerHTML = 'buyProductPage';
+    newNode.innerHTML = `
+        <div>butProductPage</div>
+    `;
 
     return newNode;
   }

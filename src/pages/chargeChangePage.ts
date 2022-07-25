@@ -1,16 +1,17 @@
-import { domCreator, domSelector } from '../utils/dom';
+import { domCreator } from '../utils/dom';
 
 class ChargeChangePage {
   pageElement: HTMLElement;
 
   constructor(pageElement: HTMLElement) {
     this.pageElement = pageElement;
-    this.addChargeChangePageElement(this.createChargeChangePageElement());
   }
 
   createChargeChangePageElement(): HTMLElement {
     const newNode: HTMLElement = domCreator('div');
-    newNode.innerHTML = 'chargeChangePage';
+    newNode.innerHTML = `
+        <div>chargeChangePage</div>
+    `;
     return newNode;
   }
 

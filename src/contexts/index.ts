@@ -1,0 +1,3 @@
+let productList = [];
+
+export { productList };

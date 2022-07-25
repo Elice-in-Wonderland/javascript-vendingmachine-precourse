@@ -19,13 +19,15 @@ class Navbar {
       btnNode.appendChild(btnElement);
 
       btnNode.style.listStyle = 'none';
-      btnNode.style.margin = '10px';
+      btnNode.style.marginRight = '10px';
 
       newNode.appendChild(btnNode);
     });
 
     newNode.style.display = 'flex';
     newNode.style.flexDirection = 'row';
+    newNode.style.margin = '0';
+    newNode.style.padding = '0';
 
     return newNode;
   }

@@ -1,11 +1,11 @@
-import Page from './pages/page';
+import App from './app';
 import { domSelector, addEventListenerToTarget } from './utils/dom';
 
 class Controller {
-  page: Page;
+  app: App;
 
-  constructor(page: Page) {
-    this.page = page;
+  constructor(app: App) {
+    this.app = app;
     this.addEvent();
   }
 
@@ -15,10 +15,23 @@ class Controller {
       'click',
       this.handleNavbarBtn.bind(this),
     );
+    addEventListenerToTarget(
+      domSelector('#product__add__btn'),
+      'click',
+      this.handleProductAddBtn.bind(this),
+    );
   }
 
   handleNavbarBtn(e: Event): void {
-    this.page.changePage(e.target.innerHTML);
+    this.app.changePage(e.target.innerHTML);
+  }
+
+  handleProductAddBtn(e: Event): void {
+    this.app.addProductTableElement(
+      domSelector('#product__name__value'),
+      domSelector('#product__price__value'),
+      domSelector('#product__cnt__value'),
+    );
   }
 }
 
