@@ -131,6 +131,10 @@ class Store {
     });
   }
 
+  getSelectedTab() {
+    return this.selectedTab;
+  }
+
   getProducts() {
     return this.vendingMachine.products;
   }

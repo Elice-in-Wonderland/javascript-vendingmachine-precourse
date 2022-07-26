@@ -53,6 +53,8 @@ class Controller {
   }
 
   changeTab(tab: string) {
+    if (this.model.getSelectedTab() === tab) return;
+
     this.model.setSelectedTab(tab);
     this.render();
   }
