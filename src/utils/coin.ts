@@ -14,3 +14,28 @@ export const randomChargeCoin = (money: number) => {
     }
     return coinObj;
 };
+
+export const returnCoin = (money: number, coins: ICoin) => {
+    const sortCoin = Object.entries(coins).reverse();
+    const returnCoins = {};
+    let totalReturnMoney = 0;
+    sortCoin.forEach(([key, value]) => {
+        const keyCoin = Number(key);
+        const moneyCount = Math.floor(money / keyCoin);
+        if (moneyCount < 0) {
+            return;
+        }
+        if (moneyCount < value) {
+            coins[key] -= moneyCount;
+            money -= moneyCount * keyCoin;
+            totalReturnMoney += moneyCount * keyCoin;
+            returnCoins[key] = moneyCount;
+            return;
+        }
+        coins[key] = 0;
+        money -= Number(value) * keyCoin;
+        totalReturnMoney += Number(value) * keyCoin;
+        returnCoins[key] = Number(value);
+    });
+    return { money, coins, returnCoins, totalReturnMoney };
+};

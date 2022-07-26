@@ -24,11 +24,10 @@ export default class ProductPurchase extends Component {
         <br/>
             <span id="charge-amount">투입한 금액:${this.state.inputCharge}</span>
         <h3>구매할 수 있는 상품 현황</h3>
-
             ${this.renderAvailableProducts()}
         <h3>잔돈</h3>
             <button id="coin-return-button">반환하기</button>
-
+            ${printCoinPossession(this.state.returnCoins)}
     `;
     }
 
@@ -92,6 +91,13 @@ export default class ProductPurchase extends Component {
                 }
                 alert(VALIDATION_MESSAGE.INSUFFICIENCY_MONEY);
             }
+        });
+        addEvent(this.container, 'click', '#coin-return-button', () => {
+            const { money, coins, returnCoins, totalReturnMoney } = returnCoin(this.state.inputCharge, this.ref.coins);
+            setLocalStorage(STORAGE_KEY.INPUT_CHARGE, money);
+            setLocalStorage(STORAGE_KEY.COINS, coins);
+            setLocalStorage(STORAGE_KEY.CHANGE, getLocalStorage(STORAGE_KEY.CHANGE, 0) - totalReturnMoney);
+            this.setState({ inputCharge: money, returnCoins: returnCoins });
         });
     }
 }
