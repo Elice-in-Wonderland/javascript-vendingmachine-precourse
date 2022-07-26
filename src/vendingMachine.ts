@@ -30,7 +30,7 @@ export default class vendingMachine extends Components {
 
     renderCallback() {
         this.menuRender();
-        this.renderContainer(ProductPurchase);
+        this.renderContainer(ProductManagement);
     }
 
     clickProductManageMent() {
