@@ -38,17 +38,16 @@ class Controller {
       this.productSubmit((event as CustomEvent).detail.product),
     );
 
-    this.vendingMachineManageView.on('@addCoins', (event: Event) =>
-      this.vendingMachineManageSubmit((event as CustomEvent).detail.amount),
-    );
-
-    this.productPurchaseView.on('@inputMoney', (event: Event) =>
-      this.productPurchaseSubmit((event as CustomEvent).detail.amount),
-    );
-
-    this.productPurchaseView.on('@productPurchase', (event: Event) =>
-      this.handleProductPurchase((event as CustomEvent).detail.product),
-    );
+    this.vendingMachineManageView
+      .on('@addCoins', (event: Event) =>
+        this.vendingMachineManageSubmit((event as CustomEvent).detail.amount),
+      )
+      .on('@inputMoney', (event: Event) =>
+        this.productPurchaseSubmit((event as CustomEvent).detail.amount),
+      )
+      .on('@productPurchase', (event: Event) =>
+        this.handleProductPurchase((event as CustomEvent).detail.product),
+      );
 
     this.productPurchaseView.on('@change', this.handleChange.bind(this));
   }

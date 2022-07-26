@@ -35,15 +35,11 @@ function delegate(
   handler: (event: Event) => void,
 ) {
   const emitEvent = (event: Event) => {
-    const potentialElements = $$(selector, target);
+    const delegatedTarget = (event.target as HTMLElement).closest(selector);
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const potentialElement of potentialElements) {
-      if (potentialElement === event.target) {
-        handler.call(event.target, event);
-        return;
-      }
-    }
+    if (!delegatedTarget) return;
+
+    handler.call(event.target, event);
   };
 
   on(target, eventName, emitEvent);
