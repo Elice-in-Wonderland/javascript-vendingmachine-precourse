@@ -23,3 +23,10 @@ export const productValidation = (product: IProduct, products: IProduct[]) => {
 const duplicateName = (productName: string, products: IProduct[]) => {
     return products.filter((item) => item.name === productName).length !== 0 ? true : false;
 };
+export const chargeValidation = (charge: number) => {
+    if (charge < 0 || charge % 10 !== 0) {
+        alert(VALIDATION_MESSAGE.NO_ROUNDED_VALUE_AND_OVER_ZERO);
+        return false;
+    }
+    return true;
+};
