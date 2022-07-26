@@ -1,6 +1,6 @@
 import { getInputValue } from './../../utils/dom';
 import Component from '../../core/Components';
-import { addEvent } from '../../utils/dom';
+import { printCoinPossession, addEvent } from '../../utils/dom';
 import { chargeValidation } from '../../utils/validation';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { STORAGE_KEY } from '../../utils/constants';
@@ -18,7 +18,7 @@ export default class ChangeCharge extends Component {
         <br/>
         <span id="vending-machine-charge-amount">투입한 금액: ${this.state.vendingMachineChange}원</span>
         <h3>동전 보유 현황</h3>
-
+            ${printCoinPossession(this.ref.coins)}
     `;
     }
 
