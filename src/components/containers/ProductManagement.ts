@@ -35,6 +35,16 @@ export default class ProductManagement extends Component {
                 <td style='${longTableStyle}'>가격</td>
                 <td style='${longTableStyle}'>수량</td>
             </tr>
+            ${this.state.products
+                .map(
+                    ({ name, price, quantity }) => `
+            <tr class="product-manage-item">
+                <td class="product-manage-name" style='${longTableStyle}'>${name}</td>
+                <td class="product-manage-price" style='${longTableStyle}'>${price}</td>
+                <td class="product-manage-quantity" style='${longTableStyle}'>${quantity}</td>
+            </tr>`,
+                )
+                .join('')}
         </table>
         `;
     }
