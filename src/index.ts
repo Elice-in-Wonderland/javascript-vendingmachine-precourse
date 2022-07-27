@@ -1,8 +1,4 @@
 import App from './app';
-import Navbar from './components/navbar';
-import Controller from './controller';
+import { domSelector } from './utils/dom';
 
-const navbar = new Navbar();
-const app = new App(navbar);
-
-new Controller(app);
+new App({ element: domSelector('#app') });

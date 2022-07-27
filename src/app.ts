@@ -1,66 +1,51 @@
 import Navbar from './components/navbar';
-import { domCreator, domSelector } from './utils/dom';
+import { domSelector } from './utils/dom';
 import BuyProductPage from './pages/buyProductPage';
 import ChargeChangePage from './pages/chargeChangePage';
 import ProductMgtPage from './pages/productMgtPage/productMgtPage';
+import CommonComponent from './commonComponent';
 
-class App {
-  app: HTMLElement;
+type PageType = ProductMgtPage | ChargeChangePage | BuyProductPage;
 
-  navbar: Navbar;
-
-  pageRoot: HTMLElement;
-
-  constructor(navbar: Navbar) {
-    this.app = domSelector('#app');
-    this.navbar = navbar;
-    navbar.addNavBtnElements(navbar.createNavBtnElements());
-    this.pageRoot = domCreator('div');
-    this.addFirstPage();
+class App extends CommonComponent {
+  markUp(): string {
+    return `
+      <header id="header"></header>
+      <main id="main"></main>
+    `;
   }
 
-  addFirstPage() {
-    this.renderProductMgtPage();
-    this.app.appendChild(this.pageRoot);
+  renderNavbar() {
+    new Navbar({
+      element: domSelector('#header', this.element),
+      props: {
+        onProductMgtPageClicked: this.onProductMgtPageClicked.bind(this),
+        onChargeChangePageClicked: this.onChargeChangePageClicked.bind(this),
+        onBuyProductPageClicked: this.onBuyProductPageClicked.bind(this),
+      },
+    });
   }
 
-  changePage(pageName: string): void {
-    this.pageRoot = domCreator('div');
-
-    switch (pageName) {
-      case '상품 관리':
-        this.renderProductMgtPage();
-        break;
-      case '잔돈 충전':
-        this.renderChargeChangePage();
-        break;
-      case '상품 구매':
-        this.renderBuyProductPage();
-        break;
-    }
-
-    this.app?.replaceChild(this.pageRoot, this.app.lastChild);
+  renderPage(page: PageType) {
+    const element = domSelector('#main', this.element);
+    new page({ element: element });
   }
 
-  renderProductMgtPage(): void {
-    const productMgtPage = new ProductMgtPage(this.pageRoot);
-    productMgtPage.addProductMgtPageElement(
-      productMgtPage.createProductMgtPageElement(),
-    );
+  onProductMgtPageClicked() {
+    this.renderPage(ProductMgtPage);
   }
 
-  renderChargeChangePage(): void {
-    const chargeChangePage = new ChargeChangePage(this.pageRoot);
-    chargeChangePage.addChargeChangePageElement(
-      chargeChangePage.createChargeChangePageElement(),
-    );
+  onChargeChangePageClicked() {
+    this.renderPage(ChargeChangePage);
   }
 
-  renderBuyProductPage(): void {
-    const buyProductPage = new BuyProductPage(this.pageRoot);
-    buyProductPage.addBuyProductPageElement(
-      buyProductPage.createBuyProductPageElement(),
-    );
+  onBuyProductPageClicked() {
+    this.renderPage(BuyProductPage);
+  }
+
+  renderCallback() {
+    this.renderNavbar();
+    this.renderPage(ProductMgtPage);
   }
 }
 
