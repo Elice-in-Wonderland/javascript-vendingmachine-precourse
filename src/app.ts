@@ -1,11 +1,14 @@
 import Navbar from './components/navbar';
 import { domSelector } from './utils/dom';
-import BuyProductPage from './pages/buyProductPage';
-import ChargeChangePage from './pages/chargeChangePage';
-import ProductMgtPage from './pages/productMgtPage/productMgtPage';
+import ProductPurchaseMenuPage from './pages/productPurchaseMenuPage/productPurchaseMenuPage';
+import VendingMachineManageMenuPage from './pages/vendingMachineManageMenuPage/vendingMachineManageMenuPage';
+import ProductAddMenuPage from './pages/productAddMenuPage/productAddMenuPage';
 import CommonComponent from './commonComponent';
 
-type PageType = ProductMgtPage | ChargeChangePage | BuyProductPage;
+type PageType =
+  | ProductAddMenuPage
+  | VendingMachineManageMenuPage
+  | ProductPurchaseMenuPage;
 
 class App extends CommonComponent {
   markUp(): string {
@@ -32,20 +35,20 @@ class App extends CommonComponent {
   }
 
   onProductMgtPageClicked() {
-    this.renderPage(ProductMgtPage);
+    this.renderPage(ProductAddMenuPage);
   }
 
   onChargeChangePageClicked() {
-    this.renderPage(ChargeChangePage);
+    this.renderPage(VendingMachineManageMenuPage);
   }
 
   onBuyProductPageClicked() {
-    this.renderPage(BuyProductPage);
+    this.renderPage(ProductPurchaseMenuPage);
   }
 
   renderCallback() {
     this.renderNavbar();
-    this.renderPage(ProductMgtPage);
+    this.renderPage(ProductAddMenuPage);
   }
 }
 

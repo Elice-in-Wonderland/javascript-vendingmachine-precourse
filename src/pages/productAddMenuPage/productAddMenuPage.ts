@@ -4,9 +4,10 @@ import {
   getLocalStorageItem,
   setLocalStorageItem,
 } from '../../utils/localStorage';
-import './productMgtPage.css';
+import { isProductValid } from '../../utils/validate';
+import './productAddMenuPage.css';
 
-class ProductMgtPage extends CommonComponent {
+class ProductAddMenuPage extends CommonComponent {
   markUp(): string {
     return `
       <h1>상품 추가하기</h1>
@@ -58,6 +59,16 @@ class ProductMgtPage extends CommonComponent {
         .value,
     };
 
+    if (
+      !isProductValid(
+        newProduct.productName,
+        newProduct.productPrice,
+        newProduct.productQuantity,
+      )
+    ) {
+      return;
+    }
+
     let productList = getLocalStorageItem('products');
 
     if (productList === null) {
@@ -78,4 +89,4 @@ class ProductMgtPage extends CommonComponent {
     );
   }
 }
-export default ProductMgtPage;
+export default ProductAddMenuPage;
