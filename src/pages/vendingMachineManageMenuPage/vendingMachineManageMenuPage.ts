@@ -66,21 +66,24 @@ class VendingMachineManageMenuPage extends CommonComponent {
       getLocalStorageItem('coins')['totalAmount'] + '';
   }
 
-  calculateCoins(chargeInput: number) {
+  generateRandomCoins(chargeInput: number) {
     if (!isCoinValid(chargeInput)) {
       return;
     }
 
-    let calculatedInputCoins = {};
-    const coinUnits = [500, 100, 50, 10];
-    let charge = chargeInput;
+    let coins = { 500: 0, 100: 0, 50: 0, 10: 0 };
 
-    coinUnits.forEach((unit) => {
-      const coinQuantity = Math.floor(charge / unit);
-      calculatedInputCoins[unit] = coinQuantity;
-      charge -= coinQuantity * unit;
-    });
-    return calculatedInputCoins;
+    while (chargeInput > 0) {
+      const randomNumber = MissionUtils.Random.pickNumberInList([
+        10, 50, 100, 500,
+      ]);
+
+      if (chargeInput / randomNumber >= 1) {
+        coins[randomNumber] += 1;
+        chargeInput -= randomNumber;
+      }
+    }
+    return coins;
   }
 
   renderCoins(): void {
@@ -95,15 +98,15 @@ class VendingMachineManageMenuPage extends CommonComponent {
   onVendingMachineChargeButtonClick(): void {
     this.saveTotalAmount();
 
-    const caculatedCoins = this.calculateCoins(
+    const ramdomCoins = this.generateRandomCoins(
       Number(domSelector('#vending-machine-charge-input').value),
     );
     let coinList = getLocalStorageItem('coins');
+    const unitList = [500, 100, 50, 10];
 
-    coinList[500] = caculatedCoins[500];
-    coinList[100] = caculatedCoins[100];
-    coinList[50] = caculatedCoins[50];
-    coinList[10] = caculatedCoins[10];
+    unitList.forEach((unit) => {
+      coinList[unit] += ramdomCoins[unit];
+    });
 
     setLocalStorageItem('coins', coinList);
 
