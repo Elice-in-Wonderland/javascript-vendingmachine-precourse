@@ -10,4 +10,12 @@ const isProductValid = (
   return true;
 };
 
-export { isProductValid };
+const isCoinValid = (coin: number) => {
+  if (coin % 10 !== 0) {
+    alert('투입할 금액이 10원 단위로 나누에 떨어지게 입력하세요');
+    return false;
+  }
+  return true;
+};
+
+export { isProductValid, isCoinValid };

@@ -1,5 +1,9 @@
 import CommonComponent from '../../commonComponent';
 import { domSelector, addEventListenerToTarget } from '../../utils/dom';
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from '../../utils/localStorage';
 import './vendingMachineManageMenuPage.css';
 
 class VendingMachineManageMenuPage extends CommonComponent {
@@ -8,7 +12,7 @@ class VendingMachineManageMenuPage extends CommonComponent {
       <h1>자판기 동전 충전하기</h1>
       <input id="vending-machine-charge-input" type="number"/>
       <button id="vending-machine-charge-button">추가하기</button>
-      <div>보유 금액: 원</div>
+      <div>보유 금액: <div id="total-amount"></div>원</div>
       <h1>동전 보유 현황</h1>
       <table id="coin-list">
           <tr>
@@ -33,6 +37,24 @@ class VendingMachineManageMenuPage extends CommonComponent {
           </tr>
       </table>
     `;
+  }
+
+  renderTotalAmount(): void {
+    const totalAmout = domSelector('#vending-machine-charge-input').value;
+    domSelector('#total-amount').innerHTML = totalAmout;
+    setLocalStorageItem('coins', { totalAmount: totalAmout });
+  }
+
+  onVendingMachineChargeButtonClick(): void {
+    this.renderTotalAmount();
+  }
+
+  setEvent(): void {
+    addEventListenerToTarget(
+      domSelector('#vending-machine-charge-button'),
+      'click',
+      this.onVendingMachineChargeButtonClick.bind(this),
+    );
   }
 }
 export default VendingMachineManageMenuPage;

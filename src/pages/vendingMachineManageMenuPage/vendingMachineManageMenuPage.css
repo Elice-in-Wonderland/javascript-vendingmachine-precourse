@@ -1,5 +1,9 @@
+#total-amount {
+  display: inline;
+}
+
 #coin-list {
-  width: 30%;
+  width: 15%;
   border: 1px solid #444444;
   border-collapse: collapse;
   text-align: center;
