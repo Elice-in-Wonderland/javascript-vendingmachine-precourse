@@ -41,7 +41,9 @@ class VendingMachineManageMenuPage extends CommonComponent {
   }
 
   saveTotalAmount(): void {
-    const totalAmout = domSelector('#vending-machine-charge-input').value;
+    const totalAmount = Number(
+      domSelector('#vending-machine-charge-input').value,
+    );
 
     let coinList = getLocalStorageItem('coins');
     if (coinList === null) {
@@ -50,17 +52,18 @@ class VendingMachineManageMenuPage extends CommonComponent {
         100: 0,
         50: 0,
         10: 0,
-        totalAmout: totalAmout,
+        totalAmount: totalAmount,
       });
       return;
     }
-    coinList['totalAmount'] = totalAmout;
+    coinList['totalAmount'] =
+      Number(getLocalStorageItem('coins')['totalAmount']) + totalAmount;
     setLocalStorageItem('coins', coinList);
   }
 
   renderTotalAmount(): void {
     domSelector('#total-amount').innerHTML =
-      getLocalStorageItem('coins')['totalAmount'];
+      getLocalStorageItem('coins')['totalAmount'] + '';
   }
 
   calculateCoins(chargeInput: number) {
@@ -81,15 +84,12 @@ class VendingMachineManageMenuPage extends CommonComponent {
   }
 
   renderCoins(): void {
-    domSelector('#coin-500').innerHTML = getLocalStorageItem('coins')[500];
-    domSelector('#coin-100').innerHTML = getLocalStorageItem('coins')[100];
-    domSelector('#coin-50').innerHTML = getLocalStorageItem('coins')[50];
-    domSelector('#coin-10').innerHTML = getLocalStorageItem('coins')[10];
-  }
-
-  renderCallback(): void {
-    this.renderTotalAmount();
-    this.renderCoins();
+    domSelector('#coin-500').innerHTML =
+      getLocalStorageItem('coins')[500] + '개';
+    domSelector('#coin-100').innerHTML =
+      getLocalStorageItem('coins')[100] + '개';
+    domSelector('#coin-50').innerHTML = getLocalStorageItem('coins')[50] + '개';
+    domSelector('#coin-10').innerHTML = getLocalStorageItem('coins')[10] + '개';
   }
 
   onVendingMachineChargeButtonClick(): void {
@@ -107,7 +107,8 @@ class VendingMachineManageMenuPage extends CommonComponent {
 
     setLocalStorageItem('coins', coinList);
 
-    this.renderCallback();
+    this.renderTotalAmount();
+    this.renderCoins();
   }
 
   setEvent(): void {
