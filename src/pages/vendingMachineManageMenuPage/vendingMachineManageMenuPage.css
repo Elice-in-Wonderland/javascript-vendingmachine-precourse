@@ -1,0 +1,16 @@
+#total-amount {
+  display: inline;
+}
+
+#coin-list {
+  width: 15%;
+  border: 1px solid #444444;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+#coin-list th,
+#coin-list td {
+  border: 1px solid #444444;
+  height: 50px;
+}
