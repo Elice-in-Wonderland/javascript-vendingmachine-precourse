@@ -1,12 +1,12 @@
-#product-list {
-  width: 50%;
+#coin-list {
+  width: 30%;
   border: 1px solid #444444;
   border-collapse: collapse;
   text-align: center;
 }
 
-#product-list th,
-#product-list td {
+#coin-list th,
+#coin-list td {
   border: 1px solid #444444;
   height: 50px;
 }

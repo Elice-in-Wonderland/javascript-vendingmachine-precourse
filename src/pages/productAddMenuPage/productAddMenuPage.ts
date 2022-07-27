@@ -17,11 +17,7 @@ class ProductAddMenuPage extends CommonComponent {
       <button id="product-add-button">추가하기</button>
       <h1>상품 현황</h1>
       <table id="product-list">
-          <tr>
-              <td>상품명</td>
-              <td>가격</td>
-              <td>수량</td>
-          </tr>
+          
       </table>
     `;
   }
@@ -30,6 +26,11 @@ class ProductAddMenuPage extends CommonComponent {
     const products = getLocalStorageItem('products');
     if (products === null) return '';
     return `
+      <tr>
+        <td>상품명</td>
+        <td>가격</td>
+        <td>수량</td>
+      </tr>
       ${products
         .map(
           ({ productName, productPrice, productQuantity }) =>
@@ -51,7 +52,7 @@ class ProductAddMenuPage extends CommonComponent {
     this.renderProducts();
   }
 
-  onProductSubmit(): void {
+  onProductAddButtonClick(): void {
     let newProduct = {
       productName: domSelector('#product-name-input', this.element).value,
       productPrice: domSelector('#product-price-input', this.element).value,
@@ -85,7 +86,7 @@ class ProductAddMenuPage extends CommonComponent {
     addEventListenerToTarget(
       domSelector('#product-add-button'),
       'click',
-      this.onProductSubmit.bind(this),
+      this.onProductAddButtonClick.bind(this),
     );
   }
 }
